@@ -1,5 +1,13 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:     
 
 jobs:
   build:
@@ -20,10 +28,21 @@ jobs:
 
     - name: Publish book
       run: |
-        git log
-        ls
+        git config --global url."https://".insteadOf git://
+        git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@github.com":
+
+        remote_repo="https://${TOKEN}@marionegroponzi/snippets.git"
+
+        cd book
+        git init
+        git config user.name "GitHub Actions"
+        git config user.email "github-actions-bot@users.noreply.github.com"
+        rm -f .DS_Store
+        git add .
+
+        git commit -m "Deploy snippets to snippets:docs"
+        git push --force "${remote_repo}" main:docs
+
       env:
-        # Target branch
-        PAGES_BRANCH: docs
         # Provide personal access token
         TOKEN: ${{ secrets.TOKEN }}

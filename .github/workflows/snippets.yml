@@ -1,0 +1,25 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Install mdbook
+      run: brew install mdbook
+
+    - name: Report versions
+      run: |
+        mdbook --version
+
+    - name: Build HTML
+      run: mdbook build
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: snippets
+        path: book

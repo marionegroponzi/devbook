@@ -31,7 +31,7 @@ jobs:
         git config --global url."https://".insteadOf git://
         git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@github.com":
 
-        remote_repo="https://${TOKEN}@marionegroponzi/snippets.git"
+        remote_repo="https://${TOKEN}@github.com/marionegroponzi/snippets.git"
 
         cd book
         git init

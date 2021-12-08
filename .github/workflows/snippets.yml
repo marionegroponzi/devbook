@@ -19,7 +19,7 @@ jobs:
       run: mdbook build
 
     - name: Publish book
-      run:
+      run: |
         git log
         ls
       env:

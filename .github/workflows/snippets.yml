@@ -2,8 +2,8 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  test:
-    name: Run tests
+  build:
+    name: Build
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
@@ -18,8 +18,11 @@ jobs:
     - name: Build HTML
       run: mdbook build
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: snippets
-        path: book
+    - name: Publish book
+      run:
+        git log
+      env:
+        # Target branch
+        PAGES_BRANCH: docs
+        # Provide personal access token
+        TOKEN: ${{ secrets.TOKEN }}

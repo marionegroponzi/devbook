@@ -21,6 +21,7 @@ jobs:
     - name: Publish book
       run:
         git log
+        ls
       env:
         # Target branch
         PAGES_BRANCH: docs

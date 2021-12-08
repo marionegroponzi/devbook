@@ -28,6 +28,7 @@ jobs:
 
     - name: Publish book
       run: |
+        git config --global init.defaultBranch main
         git config --global url."https://".insteadOf git://
         git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@github.com":
 

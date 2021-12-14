@@ -26,6 +26,8 @@
     - [OBS](apps/obs.md)
     - [Zola](apps/zola.md)
     - [mdbook](apps/mdbook.md)
+- [Clouds](clouds/README.md)
+    - [Azure](clouds/azure.md)
 
 
 -----------

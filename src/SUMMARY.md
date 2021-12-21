@@ -8,6 +8,7 @@
      - [Ruby](languages/ruby.md)
      - [Rust](languages/rust.md)
 - [Tools](tools/README.md)
+    - [macOS](tools/macos.md)
     - [ssh](tools/ssh.md)
     - [Minimal Web Servers](tools/servers.md)
     - [Fastlane](tools/fastlane.md)

@@ -21,6 +21,7 @@
         - [ripgrep](tools/cli/ripgrep.md)
         - [curl/httpie](tools/cli/curlhttpie.md)
         - [git](tools/cli/git.md)
+        - [ssh](tools/cli/ssh.md)
     - [Ansible](tools/ansible.md)
     - [Certificates](tools/certificates.md)
 - [Apps](apps/README.md)

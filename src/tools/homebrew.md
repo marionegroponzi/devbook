@@ -23,6 +23,10 @@
 
   - Do not use brew leaves to find what can be uninstalled (see link above)
 
+  - Save current brew installed list
+
+    `brew bundle dump`
+
   
 - [Java](https://formulae.brew.sh/cask/temurin)
 

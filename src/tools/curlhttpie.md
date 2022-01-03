@@ -9,3 +9,4 @@
 
 ## httpie
 - [Docs](https://httpie.io/docs)
+- [Cheatsheet](https://devhints.io/httpie)

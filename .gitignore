@@ -11,3 +11,4 @@ Cargo.lock
 
 book
 **/.DS_Store
+src/.DS_Store

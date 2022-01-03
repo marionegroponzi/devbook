@@ -16,6 +16,7 @@
     - [Rust](languages/rust.md)
 -   [Tools](tools/README.md)
     - [Ansible](tools/ansible.md)
+    - [Bash](tools/bash.md)
     - [Bazel](tools/bazel.md)
     - [Certificates](tools/certificates.md)
     - [curl/httpie](tools/curlhttpie.md)

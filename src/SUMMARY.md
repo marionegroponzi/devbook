@@ -24,6 +24,7 @@
     - [CLI (macOS)](tools/cli_macos.md)
     - [curl/httpie](tools/curlhttpie.md)
     - [Fastlane](tools/fastlane.md)
+    - [fd](tools/fd.md)
     - [git](tools/git.md)
     - [Gradle](tools/gradle.md)
     - [Homebrew](tools/homebrew.md)

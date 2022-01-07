@@ -23,9 +23,13 @@
 
   - Do not use brew leaves to find what can be uninstalled (see link above)
 
-  - Save current brew installed list
+  - Save current brew installed list (to Brewfile)
 
     `brew bundle dump`
+
+    To restore
+
+    `brew bundle install`
 
   
 - [Java](https://formulae.brew.sh/cask/temurin)

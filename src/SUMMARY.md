@@ -16,6 +16,7 @@
     - [Java](languages/java.md)
     - [Ruby](languages/ruby.md)
     - [Rust](languages/rust.md)
+    - [English](languages/english.md)
 -   [Tools](tools/README.md)
     - [Ansible](tools/ansible.md)
     - [Bash](tools/bash.md)

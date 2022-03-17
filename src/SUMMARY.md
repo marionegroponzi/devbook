@@ -34,6 +34,7 @@
         - [nslookup](tools/cli/nslookup.md)
         - [shutdown/restart](tools/cli/restart.md)
         - [thermal throttling](tools/cli/thermal.md)
+        - [xcinfo](tools/cli/xcinfo.md)
         - [Xcode cli uploader](tools/cli/xcode_uploader.md)
         - [Performance](tools/cli/performance.md)
         - [Multitime](tools/cli/multitime.md)

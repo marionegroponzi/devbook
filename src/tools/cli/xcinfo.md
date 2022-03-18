@@ -9,3 +9,4 @@ Intall multiple version of Xcode from the cli
 - Install a specific version
 
     ```xcinfo install 13.2.1```
+    

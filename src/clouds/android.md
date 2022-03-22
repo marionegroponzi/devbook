@@ -18,9 +18,9 @@
 
 - run single instrumentation test class (-q is for quiet)
 
-  `./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=<full classpath>#<test name> ABN:connected<Variant Name>AndroidTest`
+  `./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=<full classpath>#<test name> <app>:connected<Variant Name>AndroidTest`
 
 - run single instrumentation test (-q is for quiet)
 
-  `./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=<full classpath> ABN:connected<Variant Name>AndroidTest`
+  `./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=<full classpath> <app>:connected<Variant Name>AndroidTest`
 

@@ -29,3 +29,16 @@
   `./gradlew install<Variant Name>AndroidTest`
 
   `adb shell am instrument -w -e class com.example.MyInstrumentationTest#testFoo  com.example.test/android.support.test.runner.AndroidJUnitRunner`
+
+- List dependencies
+
+  `./gradlew app:dependencies`
+
+  For more insights:
+
+  `./gradlew :app:dependencyInsight --configuration compile --dependency <name>`
+  
+  `./gradlew :app:dependencyInsight --configuration testCompile --dependency <name>`
+  
+  `./gradlew :app:dependencyInsight --configuration androidTestCompile --dependency <name>`
+  

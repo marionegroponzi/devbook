@@ -2,7 +2,7 @@
 
 ## Set environment variables in macOS for GUI apps
 
-In general environemt variables for GUI apps in macOS are stored in `/etc/launchd.conf`.
+In general environment variables for GUI apps in macOS are stored in `/etc/launchd.conf`.
 
 Otherwise one can:
 

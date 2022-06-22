@@ -35,6 +35,7 @@
     - [Gradle](tools/gradle.md)
     - [Homebrew](tools/homebrew.md)
     - [Hurl](tools/hurl.md)
+    - [jq](tools/jq.md)
     - [Launchctl](tools/launchctl.md)
     - [macOS](tools/macos.md)
     - [Man In the Middle proxy aka mitm](tools/mitm.md)

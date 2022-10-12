@@ -39,6 +39,7 @@
     - [Launchctl](tools/launchctl.md)
     - [macOS](tools/macos.md)
     - [Man In the Middle proxy aka mitm](tools/mitm.md)
+    - [Maven](tools/maven.md)
     - [Minimal Web Servers](tools/servers.md)
     - [Multitime](tools/multitime.md)
     - [nslookup](tools/nslookup.md)

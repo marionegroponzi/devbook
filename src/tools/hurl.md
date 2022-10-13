@@ -2,4 +2,4 @@
 
 Making REST calls sequences easy for the terminal chaps
 
-https://hurl.dev/
+1. [Hurl](https://hurl.dev/)

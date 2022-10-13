@@ -23,6 +23,8 @@
     - [Ruby](languages/ruby.md)
     - [Rust](languages/rust.md)
     - [Swift](languages/swift.md)
+-   [Libraries](libraries/README.md)
+    - [Robolectric](libraries/robolectric.md)
 -   [Tools](tools/README.md)
     - [Ansible](tools/ansible.md)
     - [Bash](tools/bash.md)

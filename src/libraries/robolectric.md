@@ -6,7 +6,7 @@
 allprojects {
     tasks.withType<Test> {
         systemProperty("robolectric.dependency.repo.id", "nexus")
-        systemProperty("robolectric.dependency.repo.url", "https://p-nexus-3.development.nl.eu.abnamro.com:8443/repository/android-group/")
+        systemProperty("robolectric.dependency.repo.url", "https://<nexus_internal_url>:8443/repository/android-group/")
         systemProperty("javax.net.ssl.trustStoreType", "JKS")  // required for Robolectric 4.3.1 and JDK11
         systemProperty("robolectric.logging", "stdout")
     }

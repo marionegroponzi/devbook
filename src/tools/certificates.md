@@ -1,6 +1,5 @@
 # Certificates
 
-
 - [Old refrence](https://akrabat.com/syncing-macos-keychain-certificates-with-homebrews-openssl/)
 - [OpenSSL Cheat](https://gist.github.com/alvarow/1a42e608d74474ac39aa)
 - [Using OpenSSL to test SSL connectivity](https://docs.pingidentity.com/bundle/solution-guides/page/iqs1569423823079.html)
@@ -15,9 +14,13 @@ If one needs to add root certificates (e.g. becasue inside a corporate network) 
 Root certificates must be added to all tools using their own keychain/keystore.
 
 - Download the .cer and .pem file from the Keychain
+- Get pem directly via cli:
+  ```
+  openssl s_client -showcerts -connect server.edu:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile.pem
+  ```
 - Android Studio (or similar Java)
   ```
-  "/Applications/Android Studio.app/Contents/jre/Contents/Home/bin/keytool" -import -keystore "/Applications/Android Studio.app/Contents/jre/Contents/Home/lib/security/cacerts" -file "$HOME/Downloads/TIA ROOT CA 2020.cer" -alias "TIA ROOT CA 2020"
+  "/Applications/Android Studio.app/Contents/jre/Contents/Home/bin/keytool" -import -keystore "/Applications/Android Studio.app/Contents/jre/Contents/Home/lib/security/cacerts" -file "$HOME/Downloads/MYROOT.cer" -alias "MYROOT"
   ```
 - Python
   ```
@@ -31,5 +34,6 @@ Root certificates must be added to all tools using their own keychain/keystore.
   (and possibly also export PATH="/usr/local/opt/openssl@1.1/bin:$PATH")
 - Npm
   ```
-  npm config set cafile "$HOME/Downloads/certificates/TIA ROOT CA 2020.pem"
+  npm config set cafile "$HOME/Downloads/certificates/MYROOT.pem"
   ```
+

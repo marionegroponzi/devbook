@@ -11,3 +11,7 @@
 - Search ignoring case and not ingoring anything and following links
 
   `fd -iIL <name>`
+
+- Search from a specific path
+
+  `fd -e pem . '<path>'`

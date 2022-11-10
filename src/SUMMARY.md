@@ -26,6 +26,7 @@
 -   [Libraries](libraries/README.md)
     - [Robolectric](libraries/robolectric.md)
 -   [Tools](tools/README.md)
+    - [Android Debug Bridge (adb)](tools/adb.md)
     - [Ansible](tools/ansible.md)
     - [Bash](tools/bash.md)
     - [Bazel](tools/bazel.md)

@@ -1,15 +1,15 @@
 # Certificates
 
-- [Old refrence](https://akrabat.com/syncing-macos-keychain-certificates-with-homebrews-openssl/)
+- [Old reference](https://akrabat.com/syncing-macos-keychain-certificates-with-homebrews-openssl/)
 - [OpenSSL Cheat](https://gist.github.com/alvarow/1a42e608d74474ac39aa)
-- [Using OpenSSL to test SSL connectivity](https://docs.pingidentity.com/bundle/solution-guides/page/iqs1569423823079.html)
-- [Convert cer to pem](https://serverfault.com/questions/254627/how-do-i-convert-a-cer-certificate-to-pem)
-- [Check Python openssl](https://gist.github.com/therealmarv/10103946)
+- [How to use OpenSSL to test SSL connectivity](https://docs.pingidentity.com/bundle/solution-guides/page/iqs1569423823079.html)
+- [How to convert cer to pem](https://serverfault.com/questions/254627/how-do-i-convert-a-cer-certificate-to-pem)
+- [How to check Python openssl](https://gist.github.com/therealmarv/10103946)
 - [Various OpenSSL commands](https://cheapsslsecurity.com/blog/various-types-ssl-commands-keytool/)
 
 ## New
 
-If one needs to add root certificates (e.g. becasue inside a corporate network) on macOS, having it in the keychain is not enough.
+If one needs to add root certificates (e.g. because inside a corporate network) on macOS, having it in the keychain is not enough.
 
 Root certificates must be added to all tools using their own keychain/keystore.
 

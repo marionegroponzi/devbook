@@ -30,7 +30,10 @@
 - Call REST API:
   Get PAT Token
   Make REST call using Basic Authentication with username and PAT (as password)
-  e.g. curl "https://dev.azure.com/cbsp-abnamro/_apis/projects?api-version=7.0" -u "mario.negro.ponzi:<PAT>"
+  e.g. 
+  ```
+  curl "https://dev.azure.com/cbsp-abnamro/_apis/projects?api-version=7.0" -u "mario.negro.ponzi:<PAT>"
+  ```
 
 - [Creating Azure Function with REST API](https://zikalino.github.io/blog/2019/03/27/creating-azure-function-app-using-rest-api/)
 

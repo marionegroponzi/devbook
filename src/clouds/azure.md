@@ -27,11 +27,10 @@
 
 - [Set a full environment in Bash](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/bash?view=azure-devops)
 
-- `az login -u [USERNAME] -p [PASSWORD]` (more info [here](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli))
-
-  - the token is then saved in $HOME/.azure/accessTokens.json
-
-- [Calling Azure REST API via curl (and cli)](https://mauridb.medium.com/calling-azure-rest-api-via-curl-eb10a06127)
+- Call REST API:
+  Get PAT Token
+  Make REST call using Basic Authentication with username and PAT (as password)
+  e.g. curl "https://dev.azure.com/cbsp-abnamro/_apis/projects?api-version=7.0" -u "mario.negro.ponzi:<PAT>"
 
 - [Creating Azure Function with REST API](https://zikalino.github.io/blog/2019/03/27/creating-azure-function-app-using-rest-api/)
 

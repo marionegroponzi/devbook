@@ -42,3 +42,17 @@
   
   `./gradlew :app:dependencyInsight --configuration androidTestCompile --dependency <name>`
   
+- Run dex files directly on phone
+
+  ```
+  javac <file.java>
+  java <classname>
+  dx –dex –output=<file.dex> <file.class>
+  adb push <file.dex> </data/local/tmp>
+  adb shell dalvikvm –cp </data/local/tmp><file.dex> <classname>
+  ```
+  
+  
+  
+  
+  

@@ -6,4 +6,9 @@
   git cat-file main:book.toml
   ```
   [git cat-file](https://git-scm.com/docs/git-cat-file)
+- Rename current (local only) branch
+  ```
+  git branch -m <newname>
+  ```
+  
   

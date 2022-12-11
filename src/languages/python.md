@@ -1,8 +1,8 @@
 # Python
 
-- [Request](https://zetcode.com/python/requests/)
+1. [Request](https://zetcode.com/python/requests/)
 
-- ### Virtualenv
+2. ### Virtualenv
     ```
     python -m venv .env
     source .env/bin/activate
@@ -10,7 +10,7 @@
     python main.py
     deactivate
     ```
-- ### Requirements
+3. ### Requirements
     ```
     pip freeze -r > requirements.txt
     ```
@@ -21,3 +21,8 @@
     pip install pipreqs
     pipreqs path/to/project
     ```
+4. ### Install with custom certificate
+    ```
+    pip --cert $HOME/certs/MYCERT.pem install ...
+    ```
+    

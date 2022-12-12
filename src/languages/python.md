@@ -26,3 +26,9 @@
     pip --cert $HOME/certs/MYCERT.pem install ...
     ```
     
+    or find the certificate repos (e.g. in the current virtual environment)
+    ```
+    fd -e pem . venv
+    cat $HOME/certs/MYCERT.pem >> venv/lib/python3.9/site-packages/pip/_vendor/certifi/cacert.pem
+    ```
+    

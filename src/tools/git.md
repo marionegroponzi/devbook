@@ -10,5 +10,18 @@
   ```
   git branch -m <newname>
   ```
-  
+- Show local branch name
+  ```
+  git rev-parse --abbrev-ref HEAD
+  ```
+- Update and merge main in the current branch
+  ```
+  #!/bin/zsh
+  set -euo pipefail
+  MYBRANCH=`git rev-parse --abbrev-ref HEAD`
+  git checkout main
+  git pull
+  git checkout $MYBRANCH
+  git merge main
+  ```  
   

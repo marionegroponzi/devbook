@@ -41,6 +41,7 @@
 - [Swift](swift.md)
 - [thermal throttling](thermal.md)
 - [TODO](todo.md)
+- [VNC](vnc.md)
 - [xcinfo](xcinfo.md)
 - [Xcode cli uploader](xcode_uploader.md)
 - [Zola](zola.md)

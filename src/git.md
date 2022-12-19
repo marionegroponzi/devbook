@@ -24,4 +24,23 @@
   git checkout $MYBRANCH
   git merge main
   ```  
+- Analyze your git repo ([git-sizer](https://github.com/github/git-sizer) or [git-filter-repo](https://github.com/newren/git-filter-repo))
+  ```
+  brew install git-sizer
+  git-sizer
+  ```
+  or
+  ```
+  pip install git-filter-repo
+  git-filter-repo --analyze
+  open .git/filter-repo/analysis
+  ```
+- Remove large files from git and history (see [git-filter-repo](https://github.com/newren/git-filter-repo))
+  ```
+  git-filter-repo --invert-paths --path '<filename>'
+  ```
+  or use a text file with the list of paths to be deleted
+  ```
+  git-filter-repo --invert-paths --paths-from-file <tobedeleted_file_list>
+  ```
   

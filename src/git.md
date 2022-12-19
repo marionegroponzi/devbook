@@ -43,4 +43,8 @@
   ```
   git-filter-repo --invert-paths --paths-from-file <tobedeleted_file_list>
   ```
+- Find a file in any branch (supports *)
+  ```
+  git log --all -- <filepath>
+  ```
   

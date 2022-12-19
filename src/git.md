@@ -51,4 +51,14 @@
   ```
   git log --all -- '**/<filename>'
   ```
+  (if your git log does not show the branch name you can go with
+  ```
+  % git log --all -- somefile
+    ...
+    commit 123456767668
+
+  % git branch -a --contains 123456767668
+    otherbranch
+  ```
+  )
   

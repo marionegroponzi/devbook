@@ -24,6 +24,9 @@ Remember `/usr/libeexec/java_home`
 
 ## Jshell
 Jshell could be used as REPL
-Jshell can be picky 
+Jshell can be picky with the environment and complain it can't find java.
+It seems some JDK do not include jshell.
+With the java provided by `brew install --cask temurin` works.
+
 For commands whithin Jshell type `/`
 

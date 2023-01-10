@@ -13,3 +13,14 @@ Using an newer version of Java everything works
 [new_java]/bin/keytool -list -v -keystore "$HOME/.android/debug.keystore" 
     -alias androiddebugkey -storepass android -keypass android
 ```
+
+## Jenv
+Easy setup multiple environments, like pyenv for Python or rbenv for Ruby.
+It does not install Java on its own. but one can use `jenv add <java_home>` to add an existing one.
+
+## java_home
+Remember `/usr/libeexec/java_home`
+
+
+## Jshell
+Jshell could be used as REPL

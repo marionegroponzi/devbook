@@ -24,3 +24,6 @@ Remember `/usr/libeexec/java_home`
 
 ## Jshell
 Jshell could be used as REPL
+Jshell can be picky 
+For commands whithin Jshell type `/`
+

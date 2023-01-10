@@ -28,5 +28,5 @@ Jshell can be picky with the environment and complain it can't find java.
 It seems some JDK do not include jshell.
 With the java provided by `brew install --cask temurin` works.
 
-For commands whithin Jshell type `/`
+For commands within Jshell type `/`
 

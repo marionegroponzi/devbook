@@ -16,14 +16,13 @@
   ```
 - Update and merge main in the current branch
   ```
-  #!/bin/zsh
-  set -euo pipefail
-  MYBRANCH=`git rev-parse --abbrev-ref HEAD`
-  git checkout main
-  git pull
-  git checkout $MYBRANCH
+  git pull --all
   git merge main
-  ```  
+  ```
+- Swap remote
+  ```
+  git remote set-url origin <new_origin_url>
+  ```
 - Analyze your git repo ([git-sizer](https://github.com/github/git-sizer) or [git-filter-repo](https://github.com/newren/git-filter-repo))
   ```
   brew install git-sizer

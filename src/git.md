@@ -19,6 +19,10 @@
   git pull --all
   git merge main
   ```
+- Push all branches
+  ```
+  git push -u origin --all
+  ```
 - Swap remote
   ```
   git remote set-url origin <new_origin_url>

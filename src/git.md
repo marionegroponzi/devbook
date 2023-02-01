@@ -53,4 +53,13 @@
     otherbranch
   ```
   )
+- show the commit tree in the cli
+  ```
+  git log --pretty=oneline --graph --decorate --all
+  ```
+- remove untracked files (the first only shows what would be deleted)
+  ```
+  git clean -n
+  git clean -f
+  ```
   

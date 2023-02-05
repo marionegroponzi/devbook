@@ -59,3 +59,9 @@
    ```
    sudo lsof -i -P | grep LISTEN | grep :$PORT
    ```
+
+9. Follow the end of a log (e.g. mongo)
+
+   ```
+   tail -f /opt/homebrew/var/log/mongodb/mongo.log
+   ```

@@ -52,3 +52,10 @@
 
    https://github.com/actions/virtual-environments/issues/1783
    https://github.com/actions/virtual-environments/blob/main/images/macos/templates/macOS-12.json
+
+
+8. Check which process is listening to which port
+
+   ```
+   sudo lsof -i -P | grep LISTEN | grep :$PORT
+   ```

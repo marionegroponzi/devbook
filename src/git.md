@@ -62,4 +62,8 @@
   git clean -n
   git clean -f
   ```
+- show full branch tree
+  ```
+  git log --pretty=oneline --graph --decorate --all
+  ```
   

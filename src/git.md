@@ -1,6 +1,6 @@
 # git
 
-- [Add submodules](https://devconnected.com/how-to-add-and-update-git-submodules/)
+
 - Show the content of a file in git (any branch, etc.) [git cat-file](https://git-scm.com/docs/git-cat-file)   
   `git cat-file main:book.toml`  
 - Rename current (local only) branch  
@@ -66,4 +66,80 @@
   ```
   git log --pretty=oneline --graph --decorate --all
   ```
+
+
+## Submodules
+- [External ref.](https://devconnected.com/how-to-add-and-update-git-submodules/)
+- Add
+  ```
+  git submodule add http://submodule submodule
+  git add .
+  git commit -m “added submodule”
+  git push
+  ```
+- Clone
+  ```
+  git clone --recursive --jobs 6 https://module
+  cd module
+  ```
+- Pull
+  ```
+  git pull --recurse-submodules
+  ```
+- Update submodule updated elsewehre
+  ```
+  cd submodule
+  git checkout master
+  git pull # pull the latest commit from the submodule repo
+  cd ..
+  git add .
+  git commit -m “updated submodule”
+  git push
+  ```
+- Updated submodule with local changes
+  ```
+  cd submodule
+  touch changedfile.txt
+  git add .
+  git commit -m “changes to submodule”
+  git push
+  cd ..
+  git add .
+  git commit -m “updated submodule”
+  git push
+  ```
+- Avoid pushing module before submodule. 
+  If we make the following mistake:
+  ```
+  cd submodule
+  touch changedfile.txt
+  git add .
+  git commit -m “added changedfile.txt”
+  # here we forget git push
+  cd ..
+  git add .
+  git commit -m “updated submodule”
+  git push
+  ```
+  We must correct it this way:
+  ```
+  git clone --recursive --jobs 6 https://module 
+  # the above will return some errors trying to clone submodule
+  cd module/submodule
+  git checkout master
+  git pull
+  cd ..
+  git add .
+  git commit -m “fixed submodule”
+  git push
+  ```
+- Remove a submodule
+  ```
+  git rm submodule
+  git add .
+  git commit -m “removed submodule”
+  git push
+  ```
+
+
   

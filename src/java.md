@@ -1,5 +1,7 @@
 # Java
 
+
+# Android keystore
 The **keystore** format has changed around Java 8.0.3xx
 (check value of JAVA_HOME)
 
@@ -19,7 +21,7 @@ Easy setup multiple environments, like pyenv for Python or rbenv for Ruby.
 It does not install Java on its own. but one can use `jenv add <java_home>` to add an existing one.
 
 ## java_home
-Remember `/usr/libeexec/java_home`
+Remember `/usr/libexec/java_home`
 
 
 ## Jshell
@@ -30,3 +32,13 @@ With the java provided by `brew install --cask temurin` works.
 
 For commands within Jshell type `/`
 
+
+## Certificates
+- Add certificate
+```
+$JAVA_HOME/bin/keytool -importcert -file "<filepath.cer>" -cacerts -alias "<alias>"
+```
+- Delete certificate
+```
+keytool -delete -alias <alias> -keystore
+```

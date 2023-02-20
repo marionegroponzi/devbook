@@ -4,7 +4,7 @@
 
 - Create a gradle task that runs a script (example)
 
-```
+```gradle
 task myTask(dependsOn: ['assembleDebug', 'assembleRelease']) {
     group 'My group'
     description 'My description'
@@ -16,4 +16,15 @@ task myTask(dependsOn: ['assembleDebug', 'assembleRelease']) {
     }
 }
 
+```
+In Kotlin
+```Kotlin
+tasks.register("myTask") {
+    doLast {
+        val result = exec {
+            commandLine("echo", "hi")
+        }
+        println(result.exitValue)
+    }
+}
 ```

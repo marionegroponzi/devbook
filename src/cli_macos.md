@@ -39,7 +39,7 @@
 
 6. update command line tools
 
-   ```
+   ```bash
    sudo xcode-select -s /Applications/Xcode_13.2.1.app
    sudo rm -rf /Library/Developer/CommandLineTools
    sudo xcode-select --install
@@ -56,12 +56,27 @@
 
 8. Check which process is listening to which port
 
-   ```
+   ```bash
    sudo lsof -i -P | grep LISTEN | grep :$PORT
    ```
 
 9. Follow the end of a log (e.g. mongo)
 
-   ```
+   ```bash
    tail -f /opt/homebrew/var/log/mongodb/mongo.log
    ```
+
+10. access the keychain from cli. In the command $USER refer to the current user keychain [source](https://medium.com/@johnjjung/how-to-store-sensitive-environment-variables-on-macos-76bd5ba464f6)
+
+   ```bash
+   # store environment variable
+   security add-generic-password -a "$USER" -s 'name_of_your_key' -w 'passphrase'
+   # retrieve key to environment variable
+   security find-generic-password -a "$USER" -s 'name_of_your_key' -w
+   # store it locally
+   NAME_OF_YOUR_KEY=$(security find-generic-password -a "$USER" -s "name_of_your_key" -w)
+   # or
+   NAME_OF_YOUR_KEY=`security find-generic-password -a "$USER" -s 'name_of_your_key' -w`
+   ```
+
+

@@ -2,7 +2,7 @@
 
 - Time
 
-- gtime
+- gtime (gtime -v also gives info about memory usage, etc.)
 
 - [Hyperfine](https://github.com/sharkdp/hyperfine)
 

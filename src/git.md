@@ -10,7 +10,7 @@
 - Update and merge main in the current branch
   ```
   git fetch origin main:main
-  git merge main
+  git merge origin/main
   ```
 - Push all branches  
   `git push -u origin --all`

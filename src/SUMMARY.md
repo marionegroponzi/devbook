@@ -3,6 +3,7 @@
 - [Android](android.md)
 - [Android Debug Bridge (adb)](adb.md)
 - [Ansible](ansible.md)
+- [AWS](aws.md)
 - [Azure](azure.md)
 - [Bash](bash.md)
 - [Bazel](bazel.md)
@@ -44,7 +45,7 @@
 - [TODO](todo.md)
 - [VNC](vnc.md)
 - [xcinfo](xcinfo.md)
-- [Xcode cli uploader](xcode_uploader.md)
+- [Xcode](xcode.md)
 - [Zola](zola.md)
 - [zsh](zsh.md)
 

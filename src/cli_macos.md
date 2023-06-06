@@ -90,3 +90,7 @@
       ```bash
       <trace awk -F: '{printf "+%.09f", $1 - t; t=$1; $1=""; print}'
       ```
+
+12. Prevent word wrap: `tput rmam`
+
+13. Restore word wrap: `tput smam`

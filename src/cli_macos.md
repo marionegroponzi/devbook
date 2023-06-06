@@ -79,4 +79,14 @@
    NAME_OF_YOUR_KEY=`security find-generic-password -a "$USER" -s 'name_of_your_key' -w`
    ```
 
+11. Debug startup time in the terminal
+   
+      Write all steps in the file `trace`
+      ```bash
+      PS4='+%D{%s.%9.}:%N:%i>' zsh -c -i -x exit > trace 2>&1
+      ```
 
+      Make times differential
+      ```bash
+      <trace awk -F: '{printf "+%.09f", $1 - t; t=$1; $1=""; print}'
+      ```

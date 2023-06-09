@@ -94,3 +94,5 @@
 12. Prevent word wrap: `tput rmam`
 
 13. Restore word wrap: `tput smam`
+
+14. Timing shell commands: `set -x`, disabling it: `set +x`

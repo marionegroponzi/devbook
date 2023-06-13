@@ -66,6 +66,11 @@
   ```
   git log --pretty=oneline --graph --decorate --all
   ```
+- automate access token
+
+  ```
+  git config http.https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam/_git/Fabrikam.extraheader "AUTHORIZATION: bearer ********"
+  ```
 
 
 ## Submodules

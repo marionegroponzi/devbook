@@ -72,6 +72,12 @@
   git config http.https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam/_git/Fabrikam.extraheader "AUTHORIZATION: bearer ********"
   ```
 
+- squash commits on merge
+  ```
+  git merge --squash # automatic, might fail
+  git rebase -i # interactive
+  ```
+
 
 ## Submodules
 - [External ref.](https://devconnected.com/how-to-add-and-update-git-submodules/)

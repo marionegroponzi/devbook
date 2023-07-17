@@ -10,6 +10,9 @@
   export AZURE_DEVOPS_EXT_PAT=<personal_pat>
   ```
 
+- [more info about using PAT tokens with git](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Linux).  
+  (also works using "Authorization: Bearer $PAT" instead of basic and b64)
+
 - Get the list of builds for a pipeline
   ```
   az pipelines build list --project <projectname> --definition-ids <definition_id>

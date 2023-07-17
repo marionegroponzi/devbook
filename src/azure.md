@@ -11,7 +11,13 @@
   ```
 
 - [more info about using PAT tokens with git](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Linux).  
-  (also works using "Authorization: Bearer $PAT" instead of basic and b64)
+  (also works using "Authorization: Bearer $PAT" instead of basic and b64).  
+  For git LFS use something like:
+  ```
+  git config http.$origin_url.extraheader "AUTHORIZATION: bearer $SYSTEM_ACCESSTOKEN"
+  git fetch -f origin develop:develop
+  git config --unset http.$origin_url.extraheader
+  ```
 
 - Get the list of builds for a pipeline
   ```

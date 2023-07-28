@@ -24,6 +24,9 @@
   `git log <branchoff_name>^..HEAD`  
   (where branchoff_name is the name of the branch the current one has been branched off from)
 
+- Remove last (local-only) commit
+  `git reset --soft HEAD~`
+
 ## Cleaning up repos
 - Analyze your git repo ([git-sizer](https://github.com/github/git-sizer) or [git-filter-repo](https://github.com/newren/git-filter-repo))  
   `brew install git-sizer`  

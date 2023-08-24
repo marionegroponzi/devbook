@@ -20,12 +20,18 @@
 - Check which branches have been merged.  
   `git branch --merged`
 
+- Compare 2 branches  
+  `git diff branch1..branch2`
+
 - See the commits in the current branch only
   `git log <branchoff_name>^..HEAD`  
   (where branchoff_name is the name of the branch the current one has been branched off from)
 
 - Remove last (local-only) commit
   `git reset --soft HEAD~`
+
+## Fix broken pushes
+  - [On undoing, fixing, or removing commits in git](https://sethrobertson.github.io/GitFixUm/fixup.html)
 
 ## Cleaning up repos
 - Analyze your git repo ([git-sizer](https://github.com/github/git-sizer) or [git-filter-repo](https://github.com/newren/git-filter-repo))  

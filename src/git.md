@@ -87,6 +87,11 @@
   git config http.https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam/_git/Fabrikam.extraheader "AUTHORIZATION: bearer ********"
   ```
 
+  But the above leaves the token in the git config file. So better do
+  ```
+  git -c http.extraheader=AUTHORIZATION: bearer ********" ...
+  ```
+
 - squash commits on merge
   ```
   git merge --squash # automatic, might fail

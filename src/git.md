@@ -2,11 +2,14 @@
 
 
 - Show the content of a file in git (any branch, etc.) [git cat-file](https://git-scm.com/docs/git-cat-file)   
-  `git cat-file main:book.toml`  
+  `git cat-file main:book.toml`
+
 - Rename current (local only) branch  
   `git branch -m <newname>`
+
 - Show local branch name  
   `git rev-parse --abbrev-ref HEAD`
+
 - Update and merge main in the current branch
   ```
   git fetch origin main:main
@@ -14,21 +17,28 @@
   ```
 - Push all branches  
   `git push -u origin --all`
+
 - Swap remote  
   `git remote set-url origin <new_origin_url>`
 
-- Check which branches have been merged.  
+- Check which branches have been merged  
   `git branch --merged`
 
 - Compare 2 branches  
   `git diff branch1..branch2`
 
-- See the commits in the current branch only
+- See the commits in the current branch only  
   `git log <branchoff_name>^..HEAD`  
   (where branchoff_name is the name of the branch the current one has been branched off from)
 
-- Remove last (local-only) commit
+- Remove last (local-only) commit  
   `git reset --soft HEAD~`
+
+- Remove more than one (N) commit  
+  `git reset --soft HEAD~N`
+  
+- Change case of a file when working on macOS  
+  `git mv UPPERCASE uppercase`
 
 ## Fix broken pushes
   - [On undoing, fixing, or removing commits in git](https://sethrobertson.github.io/GitFixUm/fixup.html)

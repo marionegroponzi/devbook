@@ -108,6 +108,8 @@
   git rebase -i # interactive
   ```
 
+- [git tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag#:~:text=Checking%20Out%20Tags&text=This%20puts%20the%20repo%20in,by%20the%20commits%20SHA%20hash.)
+
 
 ## Submodules
 - [External ref.](https://devconnected.com/how-to-add-and-update-git-submodules/)

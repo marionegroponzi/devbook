@@ -50,4 +50,37 @@
 
 - [PAT Editing REST API](https://docs.microsoft.com/en-us/rest/api/azure/devops/tokens/pats/create?view=azure-devops-rest-7.1)
 
-- [Format output](https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#formatting-commands)
+- [Format output](https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#formatting-commands)  
+  TL;DR
+  ```
+  ##[group]Beginning of a group
+  ##[warning]Warning message
+  ##[error]Error message
+  ##[section]Start of a section
+  ##[debug]Debug text
+  ##[command]Command-line being run
+  ##[endgroup]
+  ```
+
+- Use pipeline parameters in bash
+  ```
+  parameters:
+  - name: publish
+    displayName: Publish?
+    type: boolean
+    default: true
+
+  ...
+
+  - bash: |
+    echo ${{ parameters.publish }}
+
+    if [ ${{ parameters.publish }} == 'True' ]
+    then
+      echo "true"
+    else
+      echo "false"
+    fi
+  displayName: 'Echo and check'
+
+  ```

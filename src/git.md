@@ -85,20 +85,20 @@ or
 
 ### Show full branch tree
 
-- git log --pretty=oneline --graph --decorate --all
+- `git log --pretty=oneline --graph --decorate --all`
 
 ### Automate access token
 
-- git config http.https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam/_git/Fabrikam.extraheader "AUTHORIZATION: bearer ********"
+- `git config http.https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam/_git/Fabrikam.extraheader "AUTHORIZATION: bearer ********"`
 
 But the above leaves the token in the git config file. So better do
 
-- git -c http.extraheader="AUTHORIZATION: bearer ********" ...
+- `git -c http.extraheader="AUTHORIZATION: bearer ********" ...`
 
 ### Squash commits on merge
 
-- git merge --squash # automatic, might fail
-- git rebase -i # interactive
+- `git merge --squash # automatic, might fail`
+- `git rebase -i # interactive`
 
 - [git tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag#:~:text=Checking%20Out%20Tags&text=This%20puts%20the%20repo%20in,by%20the%20commits%20SHA%20hash.)
 

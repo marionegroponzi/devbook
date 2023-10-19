@@ -184,7 +184,7 @@
   git push
   ```
 
-## Work with mutiple branch at the same time
+## Work with multiple branch at the same time
   ```
   git worktree add <path> <branch_name>
   git worktree list

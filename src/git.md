@@ -42,8 +42,9 @@
 ### Fix broken commits and push
 - [On undoing, fixing, or removing commits in git](https://sethrobertson.github.io/GitFixUm/fixup.html)
 
-## Cleaning up repos
-### Analyze your git repo ([git-sizer](https://github.com/github/git-sizer) or [git-filter-repo](https://github.com/newren/git-filter-repo))  
+### Cleaning up repos
+
+#### Analyze ([git-sizer](https://github.com/github/git-sizer) or [git-filter-repo](https://github.com/newren/git-filter-repo))  
 -  `brew install git-sizer`  
 -  `git-sizer`  
 
@@ -53,7 +54,7 @@ or
 - `git-filter-repo --analyze`
 - `open .git/filter-repo/analysis`
 
-### Remove large files from history
+#### Remove files from history
   Ref. [git-filter-repo](https://github.com/newren/git-filter-repo)
 - `git-filter-repo --invert-paths --path '<filename>'`
   or use a text file with the list of paths to be deleted
@@ -75,36 +76,38 @@ or
 - `git branch -a --contains <commit_nr>`
     otherbranch
 
-### show the commit tree in the cli
+### Show the commit tree in the cli
 - git log --pretty=oneline --graph --decorate --all
 
-### remove untracked files
+### Remove untracked files
 - `git clean -n` (dry run)
 - `git clean -f`
 
-### show full branch tree
+### Show full branch tree
 
 - git log --pretty=oneline --graph --decorate --all
 
-### automate access token
-
+### Automate access token
 
 - git config http.https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam/_git/Fabrikam.extraheader "AUTHORIZATION: bearer ********"
 
-
-  But the above leaves the token in the git config file. So better do
+But the above leaves the token in the git config file. So better do
 
 - git -c http.extraheader="AUTHORIZATION: bearer ********" ...
 
-
-### squash commits on merge
+### Squash commits on merge
 
 - git merge --squash # automatic, might fail
 - git rebase -i # interactive
 
-
 - [git tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag#:~:text=Checking%20Out%20Tags&text=This%20puts%20the%20repo%20in,by%20the%20commits%20SHA%20hash.)
 
+### Work with multiple branch at the same time
+  ```
+  git worktree add <path> <branch_name>
+  git worktree list
+  git worktree remove <worktree-name>
+  ```
 
 ## Submodules
 - [External ref.](https://devconnected.com/how-to-add-and-update-git-submodules/)
@@ -179,10 +182,4 @@ or
   git push
   ```
 
-## Work with multiple branch at the same time
-  ```
-  git worktree add <path> <branch_name>
-  git worktree list
-  git worktree remove <worktree-name>
-  ```
-  
+

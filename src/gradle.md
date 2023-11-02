@@ -16,8 +16,10 @@ task myTask(dependsOn: ['assembleDebug', 'assembleRelease']) {
     }
 }
 
-```
+```  
+
 In Kotlin
+
 ```Kotlin
 tasks.register("myTask") {
     doLast {
@@ -27,4 +29,10 @@ tasks.register("myTask") {
         println(result.exitValue)
     }
 }
+```
+
+- Remove old-ish cache
+```
+find ~/.gradle -type f -atime +30 -delete
+find ~/.gradle -type d -mindepth 1 -empty -delete
 ```

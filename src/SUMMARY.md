@@ -23,6 +23,7 @@
 - [Hurl](hurl.md)
 - [iOS](ios.md)
 - [Java](java.md)
+- [Javascript](javascript.md)
 - [jq](jq.md)
 - [Kotlin](kotlin.md)
 - [Launchctl](launchctl.md)

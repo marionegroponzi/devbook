@@ -7,3 +7,6 @@
 - [Echo commands](https://linuxhint.com/echo-shell-commands-as-executed-bash/)
 
 - [Better zsh history](https://www.soberkoder.com/better-zsh-history/)
+
+- zip all files returned by find  
+`find ./report -maxdepth 1 -name '*.csv' | zip ./report/report.zip -m@`

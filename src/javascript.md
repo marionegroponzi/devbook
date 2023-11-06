@@ -15,3 +15,6 @@
 `npm run dev`
 
 `adb reverse tcp:3000 tcp:3000`
+
+## Run processes
+Use [Execa](https://github.com/sindresorhus/execa)

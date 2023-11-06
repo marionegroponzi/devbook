@@ -18,3 +18,9 @@
 
 ## Run processes
 Use [Execa](https://github.com/sindresorhus/execa)
+
+## Summary
+- `brew install nvm`
+- `nvm ls`
+- `nvm install node` or `nvm install vx.y.z`
+- `nvm use x.y.z`

@@ -29,6 +29,8 @@
         
     ```
 
+## scp
+
 1.  copy files among remote machines (directly)
     ```
     scp [OPTION] [user@]SRC_HOST:]file1 [user@]DEST_HOST:]file2
@@ -38,3 +40,5 @@
     scp [OPTION] -3 [user@]SRC_HOST:]file1 [user@]DEST_HOST:]file2
     ```
 3.  [source of the 2 items above](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/)
+
+4. [more](https://haydenjames.io/linux-securely-copy-files-using-scp/)

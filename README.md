@@ -7,4 +7,4 @@ mdbook serve
 
 ## Remote (gihub pages)
 
-https://marionegroponzi.github.io/cookbook/
+https://marionegroponzi.github.io/devbook/

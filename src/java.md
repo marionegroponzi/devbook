@@ -42,3 +42,6 @@ $JAVA_HOME/bin/keytool -importcert -file "<filepath.cer>" -cacerts -alias "<alia
 ```
 keytool -delete -alias <alias> -keystore
 ```
+
+## Show Java properties
+`java -XshowSettings:properties -version`

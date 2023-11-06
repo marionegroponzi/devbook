@@ -44,4 +44,5 @@ keytool -delete -alias <alias> -keystore
 ```
 
 ## Show Java properties
-`java -XshowSettings:properties -version`
+`java -XshowSettings:properties -version`  
+`java -XshowSettings:all -version`

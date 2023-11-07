@@ -16,6 +16,7 @@
 - [Fastlane](fastlane.md)  
 - [Flutter](flutter.md)
 - [fd](fd.md)
+- [find](find.md)
 - [git](git.md)
 - [Google](google.md)
 - [Gradle](gradle.md)

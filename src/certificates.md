@@ -7,6 +7,9 @@
 - [How to check Python openssl](https://gist.github.com/therealmarv/10103946)
 - [Various OpenSSL commands](https://cheapsslsecurity.com/blog/various-types-ssl-commands-keytool/)
 
+## Java
+- See also [here](./java.html)
+
 ## New
 
 If one needs to add root certificates (e.g. because inside a corporate network) on macOS, having it in the keychain is not enough.

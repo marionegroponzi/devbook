@@ -36,12 +36,18 @@ For commands within Jshell type `/`
 ## Certificates
 - Add certificate
 ```
-$JAVA_HOME/bin/keytool -importcert -file "<filepath.cer>" -cacerts -alias "<alias>"
+$JAVA_HOME/bin/keytool -importcert -file "<filepath.cer>" -cacerts -alias "<alias>" -storepass changeit
 ```
 - Delete certificate
 ```
-keytool -delete -alias <alias> -keystore
+keytool -delete -alias <alias> -keystore -storepass changeit
 ```
+- List certificates
+```
+keytool -list -v -cacerts -storepass changeit
+```
+
+-[More info](https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html)
 
 ## Show Java properties
 `java -XshowSettings:properties -version`  

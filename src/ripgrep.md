@@ -5,3 +5,7 @@
   ```
   sudo rg JndiLookup --binary -z / 2>/dev/null
   ```
+- Find a string in files with extension:
+  ```
+  rg '<string>' -g '*.<ext>'
+  ```

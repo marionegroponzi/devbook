@@ -7,6 +7,7 @@
 - [Azure](azure.md)
 - [Bash](bash.md)
 - [Bazel](bazel.md)
+- [Bookmarks](bookmarks.md)
 - [Certificates](certificates.md)
 - [CLI on macOS](cli_macos.md)
 - [curl/httpie](curlhttpie.md)

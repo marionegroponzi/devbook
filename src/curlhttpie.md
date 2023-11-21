@@ -15,6 +15,8 @@
   e.g. "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0"
   ```
 
+- Download file: `curl -L -o do-bots.txt  https://www.digitalocean.com/robots.txt`
+
 
 - Access Token DevOps with git
   ```

@@ -49,6 +49,7 @@
 - [VNC](vnc.md)
 - [xcinfo](xcinfo.md)
 - [Xcode](xcode.md)
+- [zip](zip.md)
 - [Zola](zola.md)
 - [zsh](zsh.md)
 

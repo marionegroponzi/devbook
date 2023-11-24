@@ -1,4 +1,4 @@
-# macOS CLI
+# CLI
 
 1. How to get the CPU name  
    `sysctl -a | grep machdep.cpu.brand_string`
@@ -94,4 +94,6 @@
 1. Restore word wrap: `tput smam`
 
 1. Timing shell commands: `set -x`, disabling it: `set +x`
+
+1. get process that has a port open `sudo lsof -nP -i4TCP:$PORT | grep LISTEN`
 

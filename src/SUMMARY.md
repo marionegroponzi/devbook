@@ -9,7 +9,7 @@
 - [Bazel](bazel.md)
 - [Bookmarks](bookmarks.md)
 - [Certificates](certificates.md)
-- [CLI on macOS](cli_macos.md)
+- [CLI](cli.md)
 - [curl/httpie](curlhttpie.md)
 - [Dart](dart.md)
 - [English](english.md)

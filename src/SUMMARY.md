@@ -3,6 +3,7 @@
 - [Android](android.md)
 - [Android Debug Bridge (adb)](adb.md)
 - [Ansible](ansible.md)
+- [Automator](automator.md)
 - [AWS](aws.md)
 - [Azure](azure.md)
 - [Bash](bash.md)

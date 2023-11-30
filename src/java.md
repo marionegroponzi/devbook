@@ -26,4 +26,4 @@ Using an newer version of Java everything works
 
 - Show java properties: `java -XshowSettings:properties -version` 
 - Show java settings `java -XshowSettings:all -version`
-- Automate the creation of native macOS java apps with installers: [MacJava](https://centerkey.com/mac/java/)
+- Automate the creation of native macOS java apps with installers: [MacJava](https://centerkey.com/mac/java/) which is a guide for [jpackage](https://docs.oracle.com/en/java/javase/17/jpackage/index.html)

@@ -6,7 +6,7 @@
 - Install Docker CLI with: `brew install docker`
 - Try ubuntu: `docker pull ubuntu`
 - Check it is there: `docker images`
-- Run it interactively and attach to terminal: `docker run -i -t  ubuntu /bin/bash` (-d also runs in background)
+- Run it interactively and attach to terminal: `docker run -i -t  ubuntu /bin/bash` (`-d` also runs in background)
 - Create a folder `folder`
 - Create a Dockerfile within `folder` like
     ```Docker
@@ -20,3 +20,7 @@
 - Inside the image check which version of Python got installed: `python3 --version`
 - Exit: `exit`
 
+- List containers: `docker container ls -a`
+- Remove container: `docker container rm <container_id> ...`
+- List images: `docker image ls`
+- Remove images: `docker image rm <image name or id>`

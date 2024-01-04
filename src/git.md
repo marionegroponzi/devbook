@@ -101,6 +101,22 @@
   git push origin --delete <old_name>
   ```
 
+- Rewrite commit author and committer
+  ```
+  git filter-branch --commit-filter '
+        if [ "$GIT_COMMITTER_EMAIL" = "WRONG_COMMITTER_EMAIL" ];
+        then
+                GIT_AUTHOR_NAME="RIGHT_COMMITTER";
+                GIT_AUTHOR_EMAIL="RIGHT_COMMITTER_EMAIL";
+                GIT_COMMITTER_NAME="RIGHT_COMMITTER";
+                GIT_COMMITTER_EMAIL="RIGHT_COMMITTER_EMAIL";
+                git commit-tree "$@";
+        else
+                git commit-tree "$@";
+        fi' HEAD
+  git push -f --all
+  ```
+
 ## Submodules
 [External ref.](https://devconnected.com/how-to-add-and-update-git-submodules/)
 - Add

@@ -16,4 +16,4 @@
     Then instead of copying the url you can 'Copy Response' and save it to the file (e.g. paste response to notepad and save the file).  
     In the command line above replace the url by path to the saved file
 - [Carbon.sh](https://carbon.now.sh/): Create and share beautiful images of your source code
-- [Awesome Static Website](https://github.com/myles/awesome-static-generators): list of static web sites generators
+- [Awesome Static Website Generators](https://github.com/myles/awesome-static-generators): curated list of static web sites generators

@@ -97,3 +97,5 @@
 
 1. get process that has a port open `sudo lsof -nP -i4TCP:$PORT | grep LISTEN`
 
+1. force macOS to sync time: `sudo sntp -sS time.apple.com`
+

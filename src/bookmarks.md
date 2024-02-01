@@ -18,3 +18,4 @@
     In the command line above replace the url by path to the saved file
 - [Carbon.sh](https://carbon.now.sh/): Create and share beautiful images of your source code
 - [Awesome Static Website Generators](https://github.com/myles/awesome-static-generators): curated list of static web sites generators
+- [Virtual USB aka USB over internet](https://www.virtualhere.com/osx_server_software)

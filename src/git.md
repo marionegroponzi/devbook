@@ -200,3 +200,5 @@
   ```
 
 
+## References
+- [50 Shades of git](https://trinhngocthuyen.com/posts/tech/50-shades-of-git-remotes-and-authentication/)

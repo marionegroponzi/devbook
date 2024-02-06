@@ -73,11 +73,20 @@
 
 - Automate access token
 
-  `git config http.https://fabrikam.visualstudio.com/DefaultCollection/Fabrikam/_git/Fabrikam.extraheader "AUTHORIZATION: bearer ********"`
+  - For multiple repos
+    ```
+    B64_PAT=$(printf ":%s" "$SYSTEM_ACCESSTOKEN" | base64)
+    git config --global http.https://dev.azure.com/.extraheader "Authorization: Basic $B64_PAT"
+    git config --global --unset http.https://dev.azure.com/.extraheader
+    ```
 
-  But the above leaves the token in the git config file. So better do
+    But the above leaves the token in the git config file. So remember to remove it with:  
+    `git config --global --unset http.https://dev.azure.com/.extraheader`
 
-  `git -c http.extraheader="AUTHORIZATION: bearer ********" ...`
+  - For only one repo  
+    `git -c http.extraheader="Authorization: Basic $B64_PAT" clone ...`
+
+  Note: Bearer often does not work.
 
 - Squash commits on merge
 

@@ -19,3 +19,4 @@
 - [Carbon.sh](https://carbon.now.sh/): Create and share beautiful images of your source code
 - [Awesome Static Website Generators](https://github.com/myles/awesome-static-generators): curated list of static web sites generators
 - [Virtual USB aka USB over internet](https://www.virtualhere.com/osx_server_software)
+- [Santa](https://santa.dev/): Santa is a binary and file access authorization system for macOS.

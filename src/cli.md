@@ -55,7 +55,7 @@
 1. Check which process is listening to which port
 
    ```bash
-   sudo lsof -i -P | grep LISTEN | grep :$PORT
+   sudo lsof -nP -i4TCP:$POST | grep LISTEN
    ```
 
 1. Follow the end of a log (e.g. mongo)

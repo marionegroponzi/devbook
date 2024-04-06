@@ -1,4 +1,6 @@
-1. Send email via SES
+# Random notes on AWS
+
+1. How to send an email using SES
 
     ```
     sudo pip install awscli

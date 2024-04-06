@@ -1,6 +1,6 @@
 # Utilities with Automator
 
-## Paste cliboard as keyboard for the apps that don't allow cmd-v (e.g. for security)
+## How to paste the cliboard as keyboard for the apps that don't allow cmd-v (e.g. for security)
 
 - Launch Automator (yup it comes with BigSur and already installed, no need to install it)
 - New Document

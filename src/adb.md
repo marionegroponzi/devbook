@@ -1,8 +1,8 @@
 # Android Debug Bridge (adb)
 
-- Use the laptop as server: `adb reverse tcp:3000 tcp:3000`
+- How to use the laptop as server reachable froma connected Android phone: `adb reverse tcp:3000 tcp:3000`
 
-- From [here](https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8)
+- Summary of useful adb commands [from here](https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8)
 ```
 adb help // List all comands
 

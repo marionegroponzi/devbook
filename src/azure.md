@@ -1,16 +1,16 @@
-# Azure
+# Random notes on Azure
 
-- configure organization
+- How to set an organization as default using the az cli
   ```
   az devops configure --defaults organization <organization url, e.g. https://dev.azure.com/...>
   ```
 
-- configure PAT for all commands
+- How to set a Personal Access Token (PAT) for all az commands
   ```
   export AZURE_DEVOPS_EXT_PAT=<personal_pat>
   ```
 
-- [more info about using PAT tokens with git](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Linux).  
+- How to use git with PAT: [PAT tokens with git](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Linux).  
   (also works using "Authorization: Bearer $PAT" instead of basic and b64).  
   For git LFS use something like:
   ```
@@ -19,12 +19,12 @@
   git config --unset http.$origin_url.extraheader
   ```
 
-- Get the list of builds for a pipeline
+- How to get the list of builds for a pipeline
   ```
   az pipelines build list --project <projectname> --definition-ids <definition_id>
   ```
 
-- Use Java 11 in Azure DevOps pipelines
+- How to enforce using Java 11 in Azure DevOps pipelines
   ```
   - script: |
       echo "##vso[task.setvariable variable=JAVA_HOME]$(JAVA_HOME_11_X64)"
@@ -32,11 +32,11 @@
     displayName: "Set java 11"
   ```
 
-- [Create work items in Azure Boards](https://docs.microsoft.com/en-us/cli/azure/boards/work-item?view=azure-cli-latest#az-boards-work-item-create)
+- How to create WorkItems in Azure boards via cli: [Create work items in Azure Boards](https://docs.microsoft.com/en-us/cli/azure/boards/work-item?view=azure-cli-latest#az-boards-work-item-create)
 
 - [Set a full environment in Bash](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/bash?view=azure-devops)
 
-- Call REST API:
+- How to call the Azure DevOps REST API:
   Get PAT Token
   Make REST call using Basic Authentication with username and PAT (as password)
   e.g. 
@@ -44,13 +44,13 @@
   curl "https://dev.azure.com/cbsp-abnamro/_apis/projects?api-version=7.0" -u "mario.negro.ponzi:<PAT>"
   ```
 
-- [Creating Azure Function with REST API](https://zikalino.github.io/blog/2019/03/27/creating-azure-function-app-using-rest-api/)
+  - Also usfeul: [REST call with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-rest)  
 
-- [REST call with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-rest)
+- How to create Azure Functions with the REST API: [Creating Azure Function with REST API](https://zikalino.github.io/blog/2019/03/27/creating-azure-function-app-using-rest-api/)
 
-- [PAT Editing REST API](https://docs.microsoft.com/en-us/rest/api/azure/devops/tokens/pats/create?view=azure-devops-rest-7.1)
+- How to edit a PAT via REST API: [PAT Editing REST API](https://docs.microsoft.com/en-us/rest/api/azure/devops/tokens/pats/create?view=azure-devops-rest-7.1)
 
-- [Format output](https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#formatting-commands)  
+- How to format the output in the pipelines in azure DevOps: [Format output](https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#formatting-commands)  
   TL;DR
   ```
   ##[group]Beginning of a group
@@ -62,7 +62,7 @@
   ##[endgroup]
   ```
 
-- Use pipeline parameters in bash
+- How to use pipeline parameters and read them in a bash script
   ```
   parameters:
   - name: publish

@@ -1,36 +1,36 @@
 # Android
 
-- list avds
+- How to list the avds available on the computer
 
   `$ANDROID_HOME/emulator/emulator -list-avds`
 
-- start avd
+- How to start an avd
 
   `$ANDROID_HOME/emulator/emulator -avd <avd-name>`
 
-- app default location
+- What is the default location of the develop app built for Android in gradle
 
   `./build/outputs/apk/develop/debug/app.apk`
   
-- test app default location
+- What is the default location of the test app (using Espresso)
 
   ` ./build/outputs/apk/androidTest/develop/debug/app.apk`
 
-- run single instrumentation test class (-q is for quiet). Classes can be comma-separated
+- How to run single instrumentation test class (-q is for quiet). For multiple classes, they can be comma-separated
 
   `./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=<full classpath>#<test name> <app>:connected<Variant Name>AndroidTest`
 
-- run single instrumentation test (-q is for quiet)
+- How to run a single instrumentation test (-q is for quiet)
 
   `./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=<full classpath> <app>:connected<Variant Name>AndroidTest`
 
-- Alternative method using adb
+- How to run an instrumented test using adb
 
   `./gradlew install<Variant Name>AndroidTest`
 
   `adb shell am instrument -w -e class com.example.MyInstrumentationTest#testFoo  com.example.test/android.support.test.runner.AndroidJUnitRunner`
 
-- List dependencies
+- How to list all dependencies for an app
 
   `./gradlew app:dependencies`
 
@@ -42,7 +42,7 @@
   
   `./gradlew :app:dependencyInsight --configuration androidTestCompile --dependency <name>`
   
-- Run dex files directly on phone
+- How to compile and run a dex file directly on an Android phone
 
   ```
   javac <file.java>

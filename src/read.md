@@ -1,7 +1,6 @@
 # To study or try
 
-- [Ace Your Next System
-Design Interview](https://bytebytego.com/)
+- [Ace Your Next System Design Interview](https://bytebytego.com/)
 
 - [manim](https://docs.manim.community/en/stable/tutorials/quickstart.html): tool for coding animations
 
@@ -22,3 +21,5 @@ Design Interview](https://bytebytego.com/)
 - [Fast AI](https://www.fast.ai/): Free and good AI courses
 
 - [tmux](https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/): Terminal Multiplexer
+
+- [Universal Chess Interface](https://en.wikipedia.org/wiki/Universal_Chess_Interface)

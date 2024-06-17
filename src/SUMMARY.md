@@ -33,6 +33,7 @@
 - [Launchctl](launchctl.md)
 - [Maven](maven.md)
 - [mdbook](mdbook.md)
+- [mojo](mojo.md)
 - [Multitime](multitime.md)
 - [nslookup](nslookup.md)
 - [OBS](obs.md)

@@ -20,6 +20,10 @@
 - [Awesome Static Website Generators](https://github.com/myles/awesome-static-generators): curated list of static web sites generators
 - [Slint](https://slint.dev/): cross-platform language-agnostic UI library for desktop and embedded
 
+## Rust
+- [A Gentle Introduction To Rust](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
+- [Rust book](https://doc.rust-lang.org/book/)
+
 
 ---
 ## To be checked

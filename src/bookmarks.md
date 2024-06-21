@@ -18,12 +18,15 @@
     In the command line above replace the url by path to the saved file
 - [Carbon.sh](https://carbon.now.sh/): Create and share beautiful images of your source code
 - [Awesome Static Website Generators](https://github.com/myles/awesome-static-generators): curated list of static web sites generators
-- [Slint](https://slint.dev/): cross-platform language-agnostic UI library for desktop and embedded
+
+- [OpenAPI code generator](https://github.com/OpenAPITools/openapi-generator)
+- [Telegram bot APIs versioned](https://github.com/sys-001/telegram-bot-api-versions/tree/main/files/openapi/yaml)
+
 
 ## Rust
 - [A Gentle Introduction To Rust](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
 - [Rust book](https://doc.rust-lang.org/book/)
-
+- [Slint](https://slint.dev/): cross-platform language-agnostic UI library for desktop and embedded, not only for Rust
 
 ---
 ## To be checked

@@ -49,6 +49,7 @@
 - [Swift](swift.md)
 - [thermal throttling](thermal.md)
 - [TODO](todo.md)
+- [Various](various.md)
 - [VNC](vnc.md)
 - [xcinfo](xcinfo.md)
 - [Xcode](xcode.md)

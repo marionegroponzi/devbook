@@ -1,5 +1,9 @@
 # Summary
 
+- [Frequently Used](frequent.md)
+
+-----------
+
 - [Android](android.md)
 - [Android Debug Bridge (adb)](adb.md)
 - [Ansible](ansible.md)
@@ -50,6 +54,7 @@
 - [thermal throttling](thermal.md)
 - [TODO](todo.md)
 - [Various](various.md)
+- [Visual Studio Code](vscode.md)
 - [VNC](vnc.md)
 - [xcinfo](xcinfo.md)
 - [Xcode](xcode.md)

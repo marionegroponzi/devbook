@@ -14,6 +14,9 @@
 
 - Others: https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf
 
+- Remove trailing spaces:
+    - File > Preferences > Settings > User Settings > search for "files.trimTrailingWhitespace"
+
 
 ## IntelliJ
 - Reformat Code: Cmd + Option + L
@@ -25,6 +28,14 @@
 - Search Everywhere: Double Shift
 
 - Navigating Backward and Forward: Cmd + [/]
+
+- How to change line width:
+    - Settings > Editor > Code Style > Hard Wrap at
+    - Settings > Editor > Code Style > Visual Guides
+    - .editorconfig > max_line_length = ..
+
+- Remove trailing spaces:
+    - Settings > Editor > General > Strip trailing spaces on Save
 
 ## Python
 - ```

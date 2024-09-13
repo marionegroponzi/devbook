@@ -11,16 +11,18 @@
 - [Talon Excercises](https://chaosparrot.github.io/talon_practice/): Practice Talon Voice
 - [Twine/Twinery](https://twinery.org/): Tool for interactive non linear stories
 - [How to download videos from Teams/Stream](https://www.lisenet.com/2022/how-to-download-view-only-teams-meeting-recording-video-from-sharepoint/):
-    > Open Firefox (or the browser of your choice) and load the SharePoint page with the video that you want to download, then open the page inspector (Ctrl + Shift + C). Click on the Network tab. Type videomanifest where it says "Filter URLs". Press F5 to refresh the page. When the page reloads, copy the file URL. Use ffmpeg to download the video by pasting     the URL from above:  
-    ffmpeg -i "https://copied_videomanifest_url" -codec copy video.mp4  
-    UPD: If you have an error (cannot parse file etc.) probably videomanifest url requires credentials.  
-    Then instead of copying the url you can 'Copy Response' and save it to the file (e.g. paste response to notepad and save the file).  
+    > Open Firefox (or the browser of your choice) and load the SharePoint page with the video that you want to download, then open the page inspector (Ctrl + Shift + C). Click on the Network tab. Type videomanifest where it says "Filter URLs". Press F5 to refresh the page. When the page reloads, copy the file URL. Use ffmpeg to download the video by pasting     the URL from above:
+    ffmpeg -i "https://copied_videomanifest_url" -codec copy video.mp4
+    UPD: If you have an error (cannot parse file etc.) probably videomanifest url requires credentials.
+    Then instead of copying the url you can 'Copy Response' and save it to the file (e.g. paste response to notepad and save the file).
     In the command line above replace the url by path to the saved file
 - [Carbon.sh](https://carbon.now.sh/): Create and share beautiful images of your source code
 - [Awesome Static Website Generators](https://github.com/myles/awesome-static-generators): curated list of static web sites generators
 
 - [OpenAPI code generator](https://github.com/OpenAPITools/openapi-generator)
 - [Telegram bot APIs versioned](https://github.com/sys-001/telegram-bot-api-versions/tree/main/files/openapi/yaml)
+
+- [Merchants of complexity](https://world.hey.com/dhh/merchants-of-complexity-4851301b)
 
 
 ## Rust

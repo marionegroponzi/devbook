@@ -38,6 +38,8 @@
     - Settings > Editor > General > Strip trailing spaces on Save
 
 ## Python
+- Better Python packaging: [UV](https://github.com/astral-sh/uv)
+
 - ```
     python -m venv venv
     source venv/bin/activate

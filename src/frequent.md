@@ -48,3 +48,6 @@
     deactivate
 ```
 
+## Git
+- Remove local branches not in remote
+`git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D`

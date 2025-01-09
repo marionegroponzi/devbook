@@ -1,0 +1,626 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Android Debug Bridge (adb) - DevBook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">DevBook</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="android-debug-bridge-adb"><a class="header" href="#android-debug-bridge-adb">Android Debug Bridge (adb)</a></h1>
+<ul>
+<li>
+<p>How to use the laptop as server reachable froma connected Android phone: <code>adb reverse tcp:3000 tcp:3000</code></p>
+</li>
+<li>
+<p>Summary of useful adb commands <a href="https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8">from here</a></p>
+</li>
+</ul>
+<pre><code>adb help // List all comands
+
+== Adb Server
+adb kill-server
+adb start-server 
+
+== Adb Reboot
+adb reboot
+adb reboot recovery 
+adb reboot-bootloader
+adb root //restarts adb with root permissions
+
+== Shell
+adb shell    // Open or run commands in a terminal on the host Android device.
+
+== Devices
+adb usb
+adb devices   //show devices attached
+adb devices -l //devices (product/model)
+adb connect ip_address_of_device
+
+== Get device android version
+adb shell getprop ro.build.version.release 
+
+== LogCat
+adb logcat
+adb logcat -c // clear // The parameter -c will clear the current logs on the device.
+adb logcat -d &gt; [path_to_file] // Save the logcat output to a file on the local system.
+adb bugreport &gt; [path_to_file] // Will dump the whole device information like dumpstate, dumpsys and logcat output.
+
+== Files
+adb push [source] [destination]    // Copy files from your computer to your phone.
+adb pull [device file location] [local file location] // Copy files from your phone to your computer.
+
+== App install
+adb -e install path/to/app.apk
+
+-d                        - directs command to the only connected USB device...
+-e                        - directs command to the only running emulator...
+-s &lt;serial number&gt;        ...
+-p &lt;product name or path&gt; ...
+The flag you decide to use has to come before the actual adb command:
+
+adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X install -r com.myAppPackage // Install the given app on all connected devices.
+
+== Uninstalling app from device
+adb uninstall com.myAppPackage
+adb uninstall &lt;app .apk name&gt;
+adb uninstall -k &lt;app .apk name&gt; -&gt; "Uninstall .apk withour deleting data"
+
+adb shell pm uninstall com.example.MyApp
+adb shell pm clear [package] // Deletes all data associated with a package.
+
+adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X uninstall com.myAppPackage //Uninstall the given app from all connected devices
+
+== Update app
+adb install -r yourApp.apk  //  -r means re-install the app and keep its data on the device.
+adb install –k &lt;.apk file path on computer&gt; 
+
+== Home button
+adb shell am start -W -c android.intent.category.HOME -a android.intent.action.MAIN
+
+== Activity Manager
+adb shell am start -a android.intent.action.VIEW
+adb shell am broadcast -a 'my_action'
+
+adb shell am start -a android.intent.action.CALL -d tel:+972527300294 // Make a call
+
+// Open send sms screen with phone number and the message:
+adb shell am start -a android.intent.action.SENDTO -d sms:+972527300294   --es  sms_body "Test --ez exit_on_sent false
+
+// Reset permissions
+adb shell pm reset-permissions -p your.app.package 
+adb shell pm grant [packageName] [ Permission]  // Grant a permission to an app. 
+adb shell pm revoke [packageName] [ Permission]   // Revoke a permission from an app.
+
+
+// Emulate device
+adb shell wm size 2048x1536
+adb shell wm density 288
+// And reset to default
+adb shell wm size reset
+adb shell wm density reset
+
+== Print text
+adb shell input text 'Wow, it so cool feature'
+
+== Screenshot
+adb shell screencap -p /sdcard/screenshot.png
+
+$ adb shell
+shell@ $ screencap /sdcard/screen.png
+shell@ $ exit
+$ adb pull /sdcard/screen.png
+
+---
+adb shell screenrecord /sdcard/NotAbleToLogin.mp4
+
+$ adb shell
+shell@ $ screenrecord --verbose /sdcard/demo.mp4
+(press Control + C to stop)
+shell@ $ exit
+$ adb pull /sdcard/demo.mp4
+
+== Key event
+adb shell input keyevent 3 // Home btn
+adb shell input keyevent 4 // Back btn
+adb shell input keyevent 5 // Call
+adb shell input keyevent 6 // End call
+adb shell input keyevent 26  // Turn Android device ON and OFF. It will toggle device to on/off status.
+adb shell input keyevent 27 // Camera
+adb shell input keyevent 64 // Open browser
+adb shell input keyevent 66 // Enter
+adb shell input keyevent 67 // Delete (backspace)
+adb shell input keyevent 207 // Contacts
+adb shell input keyevent 220 / 221 // Brightness down/up
+adb shell input keyevent 277 / 278 /279 // Cut/Copy/Paste
+
+0 --&gt;  "KEYCODE_0" 
+1 --&gt;  "KEYCODE_SOFT_LEFT" 
+2 --&gt;  "KEYCODE_SOFT_RIGHT" 
+3 --&gt;  "KEYCODE_HOME" 
+4 --&gt;  "KEYCODE_BACK" 
+5 --&gt;  "KEYCODE_CALL" 
+6 --&gt;  "KEYCODE_ENDCALL" 
+7 --&gt;  "KEYCODE_0" 
+8 --&gt;  "KEYCODE_1" 
+9 --&gt;  "KEYCODE_2" 
+10 --&gt;  "KEYCODE_3" 
+11 --&gt;  "KEYCODE_4" 
+12 --&gt;  "KEYCODE_5" 
+13 --&gt;  "KEYCODE_6" 
+14 --&gt;  "KEYCODE_7" 
+15 --&gt;  "KEYCODE_8" 
+16 --&gt;  "KEYCODE_9" 
+17 --&gt;  "KEYCODE_STAR" 
+18 --&gt;  "KEYCODE_POUND" 
+19 --&gt;  "KEYCODE_DPAD_UP" 
+20 --&gt;  "KEYCODE_DPAD_DOWN" 
+21 --&gt;  "KEYCODE_DPAD_LEFT" 
+22 --&gt;  "KEYCODE_DPAD_RIGHT" 
+23 --&gt;  "KEYCODE_DPAD_CENTER" 
+24 --&gt;  "KEYCODE_VOLUME_UP" 
+25 --&gt;  "KEYCODE_VOLUME_DOWN" 
+26 --&gt;  "KEYCODE_POWER" 
+27 --&gt;  "KEYCODE_CAMERA" 
+28 --&gt;  "KEYCODE_CLEAR" 
+29 --&gt;  "KEYCODE_A" 
+30 --&gt;  "KEYCODE_B" 
+31 --&gt;  "KEYCODE_C" 
+32 --&gt;  "KEYCODE_D" 
+33 --&gt;  "KEYCODE_E" 
+34 --&gt;  "KEYCODE_F" 
+35 --&gt;  "KEYCODE_G" 
+36 --&gt;  "KEYCODE_H" 
+37 --&gt;  "KEYCODE_I" 
+38 --&gt;  "KEYCODE_J" 
+39 --&gt;  "KEYCODE_K" 
+40 --&gt;  "KEYCODE_L" 
+41 --&gt;  "KEYCODE_M" 
+42 --&gt;  "KEYCODE_N" 
+43 --&gt;  "KEYCODE_O" 
+44 --&gt;  "KEYCODE_P" 
+45 --&gt;  "KEYCODE_Q" 
+46 --&gt;  "KEYCODE_R" 
+47 --&gt;  "KEYCODE_S" 
+48 --&gt;  "KEYCODE_T" 
+49 --&gt;  "KEYCODE_U" 
+50 --&gt;  "KEYCODE_V" 
+51 --&gt;  "KEYCODE_W" 
+52 --&gt;  "KEYCODE_X" 
+53 --&gt;  "KEYCODE_Y" 
+54 --&gt;  "KEYCODE_Z" 
+55 --&gt;  "KEYCODE_COMMA" 
+56 --&gt;  "KEYCODE_PERIOD" 
+57 --&gt;  "KEYCODE_ALT_LEFT" 
+58 --&gt;  "KEYCODE_ALT_RIGHT" 
+59 --&gt;  "KEYCODE_SHIFT_LEFT" 
+60 --&gt;  "KEYCODE_SHIFT_RIGHT" 
+61 --&gt;  "KEYCODE_TAB" 
+62 --&gt;  "KEYCODE_SPACE" 
+63 --&gt;  "KEYCODE_SYM" 
+64 --&gt;  "KEYCODE_EXPLORER" 
+65 --&gt;  "KEYCODE_ENVELOPE" 
+66 --&gt;  "KEYCODE_ENTER" 
+67 --&gt;  "KEYCODE_DEL" 
+68 --&gt;  "KEYCODE_GRAVE" 
+69 --&gt;  "KEYCODE_MINUS" 
+70 --&gt;  "KEYCODE_EQUALS" 
+71 --&gt;  "KEYCODE_LEFT_BRACKET" 
+72 --&gt;  "KEYCODE_RIGHT_BRACKET" 
+73 --&gt;  "KEYCODE_BACKSLASH" 
+74 --&gt;  "KEYCODE_SEMICOLON" 
+75 --&gt;  "KEYCODE_APOSTROPHE" 
+76 --&gt;  "KEYCODE_SLASH" 
+77 --&gt;  "KEYCODE_AT" 
+78 --&gt;  "KEYCODE_NUM" 
+79 --&gt;  "KEYCODE_HEADSETHOOK" 
+80 --&gt;  "KEYCODE_FOCUS" 
+81 --&gt;  "KEYCODE_PLUS" 
+82 --&gt;  "KEYCODE_MENU" 
+83 --&gt;  "KEYCODE_NOTIFICATION" 
+84 --&gt;  "KEYCODE_SEARCH" 
+85 --&gt;  "KEYCODE_MEDIA_PLAY_PAUSE"
+86 --&gt;  "KEYCODE_MEDIA_STOP"
+87 --&gt;  "KEYCODE_MEDIA_NEXT"
+88 --&gt;  "KEYCODE_MEDIA_PREVIOUS"
+89 --&gt;  "KEYCODE_MEDIA_REWIND"
+90 --&gt;  "KEYCODE_MEDIA_FAST_FORWARD"
+91 --&gt;  "KEYCODE_MUTE"
+92 --&gt;  "KEYCODE_PAGE_UP"
+93 --&gt;  "KEYCODE_PAGE_DOWN"
+94 --&gt;  "KEYCODE_PICTSYMBOLS"
+...
+122 --&gt;  "KEYCODE_MOVE_HOME"
+123 --&gt;  "KEYCODE_MOVE_END"
+// https://developer.android.com/reference/android/view/KeyEvent.html
+
+
+== ShPref
+# replace org.example.app with your application id
+
+# Add a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value "hello world!"'
+
+# Remove a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'
+
+# Clear all default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'
+
+# It's also possible to specify shared preferences file.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es name Game --es key level --ei value 10'
+
+# Data types
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key string --es value "hello world!"'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key boolean --ez value true'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key float --ef value 3.14159'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key int --ei value 2015'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key long --el value 9223372036854775807'
+
+# Restart application process after making changes
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --ez restart true'
+
+== Monkey
+adb shell monkey -p com.myAppPackage -v 10000 -s 100 // monkey tool is generating 10.000 random events on the real device
+
+== Paths
+/data/data/&lt;package&gt;/databases (app databases)
+/data/data/&lt;package&gt;/shared_prefs/ (shared preferences)
+/data/app (apk installed by user)
+/system/app (pre-installed APK files)
+/mmt/asec (encrypted apps) (App2SD)
+/mmt/emmc (internal SD Card)
+/mmt/adcard (external/Internal SD Card)
+/mmt/adcard/external_sd (external SD Card)
+
+adb shell ls (list directory contents)
+adb shell ls -s (print size of each file)
+adb shell ls -R (list subdirectories recursively)
+
+== Device onformation
+adb get-statе (print device state)
+adb get-serialno (get the serial number)
+adb shell dumpsys iphonesybinfo (get the IMEI)
+adb shell netstat (list TCP connectivity)
+adb shell pwd (print current working directory)
+adb shell dumpsys battery (battery status)
+adb shell pm list features (list phone features)
+adb shell service list (list all services)
+adb shell dumpsys activity &lt;package&gt;/&lt;activity&gt; (activity info)
+adb shell ps (print process status)
+adb shell wm size (displays the current screen resolution)
+dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp' (print current app's opened activity)
+
+== Package info
+adb shell list packages (list package names)
+adb shell list packages -r (list package name + path to apks)
+adb shell list packages -3 (list third party package names)
+adb shell list packages -s (list only system packages)
+adb shell list packages -u (list package names + uninstalled)
+adb shell dumpsys package packages (list info on all apps)
+adb shell dump &lt;name&gt; (list info on one package)
+adb shell path &lt;package&gt; (path to the apk file)
+
+==Configure Settings Commands
+adb shell dumpsys battery set level &lt;n&gt; (change the level from 0 to 100)
+adb shell dumpsys battery set status&lt;n&gt; (change the level to unknown, charging, discharging, not charging or full)
+adb shell dumpsys battery reset (reset the battery)
+adb shell dumpsys battery set usb &lt;n&gt; (change the status of USB connection. ON or OFF)
+adb shell wm size WxH (sets the resolution to WxH)
+
+
+== Device Related Commands
+adb reboot-recovery (reboot device into recovery mode)
+adb reboot fastboot (reboot device into recovery mode)
+adb shell screencap -p "/path/to/screenshot.png" (capture screenshot)
+adb shell screenrecord "/path/to/record.mp4" (record device screen)
+adb backup -apk -all -f backup.ab (backup settings and apps)
+adb backup -apk -shared -all -f backup.ab (backup settings, apps and shared storage)
+adb backup -apk -nosystem -all -f backup.ab (backup only non-system apps)
+adb restore backup.ab (restore a previous backup)
+adb shell am start|startservice|broadcast &lt;INTENT&gt;[&lt;COMPONENT&gt;]
+-a &lt;ACTION&gt; e.g. android.intent.action.VIEW
+-c &lt;CATEGORY&gt; e.g. android.intent.category.LAUNCHER (start activity intent)
+
+adb shell am start -a android.intent.action.VIEW -d URL (open URL)
+adb shell am start -t image/* -a android.intent.action.VIEW (opens gallery)
+
+== Logs
+adb logcat [options] [filter] [filter] (view device log)
+adb bugreport (print bug reports)
+
+== Other
+adb backup // Create a full backup of your phone and save to the computer.
+adb restore // Restore a backup to your phone.
+adb sideload //  Push and flash custom ROMs and zips from your computer.
+
+fastboot devices
+// Check connection and get basic information about devices connected to the computer.
+// This is essentially the same command as adb devices from earlier. 
+//However, it works in the bootloader, which ADB does not. Handy for ensuring that you have properly established a connection.
+
+
+--------------------------------------------------------------------------------
+Shared Preferences
+
+# replace org.example.app with your application id
+
+# Add a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value "hello world!"'
+
+# Remove a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'
+
+# Clear all default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'
+
+# It's also possible to specify shared preferences file.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es name Game --es key level --ei value 10'
+
+# Data types
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key string --es value "hello world!"'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key boolean --ez value true'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key float --ef value 3.14159'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key int --ei value 2015'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key long --el value 9223372036854775807'
+
+# Restart application process after making changes
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --ez restart true'
+--------------------------------------------------------------------------------
+
+=== Few bash snippets ===
+@Source (https://jonfhancock.com/bash-your-way-to-better-android-development-1169bc3e0424)
+
+=== Using tail -n
+//Use tail to remove the first line. Actually two lines. The first one is just a newline. The second is “List of devices attached.”
+$ adb devices | tail -n +2
+
+=== Using cut -sf
+// Cut the last word and any white space off the end of each line.
+$ adb devices | tail -n +2 | cut -sf -1
+
+=== Using xargs -I
+// Given the -I option, xargs will perform an action for each line of text that we feed into it.
+// We can give the line a variable name to use in commands that xargs can execute.
+$ adb devices | tail -n +2 | cut -sf -1 | xargs -I X echo X aw yiss
+
+=== Three options below together
+// Will print android version of all connected devices
+adb devices | tail -n +2 | cut -sf -1 | xargs -I X adb -s X shell getprop ro.build.version.release  
+
+=== Using alias
+-- Example 1 
+alias tellMeMore=echo
+tellMeMore "hi there"
+Output =&gt; hi there
+-- Example 2
+// Define alias
+alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
+// And you can use it later 
+apkinstall ~/Downloads/MyAppRelease.apk  // Install an apk on all devices
+-- Example 3
+alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall $1"
+rmapp com.example.myapp // Uninstall a package from all devices
+-- Example 4
+alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear $1"
+clearapp com.example.myapp  // Clear data on all devices (leave installed)
+-- Example 5
+alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start $1"
+startintent https://twitter.com/JonFHancock // Launch a deep link on all devices
+
+
+Setting up your .bash_profile
+Finally, to make this all reusable even after rebooting your computer (aliases only last through the current session), we have to add these to your .bash_profile. You might or might not already have a .bash_profile, so let’s make sure we append to it rather than overwriting it. Just open a terminal, and run the following command
+
+touch .bash_profile &amp;&amp; open .bash_profile
+
+This will create it if it doesn’t already exist, and open it in a text editor either way. Now just copy and paste all of the aliases into it, save, and close.
+
+alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start $1"
+alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
+alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall $1"
+alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear $1"
+
+
+===============================================================
+Sources:
+- Internet
+- https://www.automatetheplanet.com/adb-cheat-sheet/
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="android.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ansible.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="android.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ansible.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

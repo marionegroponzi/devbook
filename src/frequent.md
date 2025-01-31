@@ -19,7 +19,9 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 
 - Navigate Backward/Forward: Ctrl + - / Ctrl + Shift + -
 
-- Others: https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf
+- [Others](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+
+- Rulers: "editor.rulers": [80,120]
 
 - Remove trailing spaces:
     - File > Preferences > Settings > User Settings > search for "files.trimTrailingWhitespace"

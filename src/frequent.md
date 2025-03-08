@@ -9,6 +9,7 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 ```
 
 ## VSCode
+
 - Select all occurrences of selected word: Cmd + F2
 
 - Auto Indent Code: Shift + Option + F
@@ -28,6 +29,7 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 
 
 ## IntelliJ
+
 - Reformat Code: Cmd + Option + L
 
 - Goto Declaration: Cmd + B
@@ -46,6 +48,9 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 - Remove trailing spaces:
     - Settings > Editor > General > Strip trailing spaces on Save
 
+## macOS Update
+
+- `echo '<password>' | sudo softwareupdate -iaR --user <username> --stdinpass && history -p && rm ~/.zsh_history`
 
 ## Python dance
 
@@ -91,5 +96,4 @@ ruff 0.5.0
     python main.py
     deactivate
 ```
-
 

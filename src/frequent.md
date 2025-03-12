@@ -25,7 +25,10 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 - Rulers: "editor.rulers": [80,120]
 
 - Remove trailing spaces:
-    - File > Preferences > Settings > User Settings > search for "files.trimTrailingWhitespace"
+    - Code > Settings > Settings > User Settings > search for "files.trimTrailingWhitespace"
+
+- Disable Sticky Scroll:
+    - Code > Settings > Settings > Editor > Sticky Scroll (editor.stickyScroll.enabled)
 
 
 ## IntelliJ

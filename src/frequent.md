@@ -51,9 +51,15 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 - Remove trailing spaces:
     - Settings > Editor > General > Strip trailing spaces on Save
 
-## macOS Update
+## macOS
 
-- `echo '<password>' | sudo softwareupdate -iaR --user <username> --stdinpass && history -p && rm ~/.zsh_history`
+- Update from the Terminal
+
+    `echo '<password>' | sudo softwareupdate -iaR --user <username> --stdinpass && history -p && rm ~/.zsh_history`
+
+- Restart from the Terminal
+
+    `sudo shutdown -r now`
 
 ## Python dance
 

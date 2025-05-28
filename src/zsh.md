@@ -4,6 +4,8 @@
 
 - `cp -a` preserves flags and dates (and implies -r)
 
+- clear history `exec rm "$HISTFILE"`
+
 - execute a command every time one cd-ing into a foler:
 ```
 function cd {

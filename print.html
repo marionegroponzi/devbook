@@ -1,0 +1,2544 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DevBook</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">DevBook</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="frequently-used"><a class="header" href="#frequently-used">Frequently used</a></h1>
+<h2 id="git"><a class="header" href="#git">Git</a></h2>
+<ul>
+<li>Remove local branches not in remote</li>
+</ul>
+<pre><code>git pull &amp;&amp; git fetch --prune &amp;&amp; git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+</code></pre>
+<h2 id="vscode"><a class="header" href="#vscode">VSCode</a></h2>
+<ul>
+<li>
+<p>Select all occurrences of selected word: Cmd + F2</p>
+</li>
+<li>
+<p>Auto Indent Code: Shift + Option + F</p>
+</li>
+<li>
+<p>Goto recent file: Cmd + P</p>
+</li>
+<li>
+<p>Multi-Cursor: Option + Click</p>
+</li>
+<li>
+<p>Navigate Backward/Forward: Ctrl + - / Ctrl + Shift + -</p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf">Others</a></p>
+</li>
+<li>
+<p>Rulers: "editor.rulers": [80,120]</p>
+</li>
+<li>
+<p>Remove trailing spaces:</p>
+<ul>
+<li>Code &gt; Settings &gt; Settings &gt; User Settings &gt; search for "files.trimTrailingWhitespace"</li>
+</ul>
+</li>
+<li>
+<p>Disable Sticky Scroll:</p>
+<ul>
+<li>Code &gt; Settings &gt; Settings &gt; Editor &gt; Sticky Scroll (editor.stickyScroll.enabled)</li>
+</ul>
+</li>
+</ul>
+<h2 id="intellij"><a class="header" href="#intellij">IntelliJ</a></h2>
+<ul>
+<li>
+<p>Reformat Code: Cmd + Option + L</p>
+</li>
+<li>
+<p>Goto Declaration: Cmd + B</p>
+</li>
+<li>
+<p>Goto Implementation: Cmd + Option + B</p>
+</li>
+<li>
+<p>Search Everywhere: Double Shift</p>
+</li>
+<li>
+<p>Navigating Backward and Forward: Cmd + [/]</p>
+</li>
+<li>
+<p>How to change line width:</p>
+<ul>
+<li>Settings &gt; Editor &gt; Code Style &gt; Hard Wrap at</li>
+<li>Settings &gt; Editor &gt; Code Style &gt; Visual Guides</li>
+<li>.editorconfig &gt; max_line_length = ..</li>
+</ul>
+</li>
+<li>
+<p>Remove trailing spaces:</p>
+<ul>
+<li>Settings &gt; Editor &gt; General &gt; Strip trailing spaces on Save</li>
+</ul>
+</li>
+</ul>
+<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
+<ul>
+<li>
+<p>Update from the Terminal</p>
+<p><code>echo '&lt;password&gt;' | sudo softwareupdate -iaR --user &lt;username&gt; --stdinpass &amp;&amp; history -p &amp;&amp; rm ~/.zsh_history</code></p>
+</li>
+<li>
+<p>Restart from the Terminal</p>
+<p><code>sudo shutdown -r now</code></p>
+</li>
+</ul>
+<h2 id="python-dance"><a class="header" href="#python-dance">Python dance</a></h2>
+<ul>
+<li>Better Python packaging: <a href="https://github.com/astral-sh/uv">UV</a></li>
+</ul>
+<pre><code>### Install.
+$ curl -LsSf https://astral.sh/uv/install.sh | sh
+$ uv self update
+
+### Sample
+$ uv init example
+Initialized project `example` at `/home/user/example`
+$ cd example
+$ uv add ruff
+Creating virtual environment at: .venv
+Resolved 2 packages in 170ms
+   Built example @ file:///home/user/example
+Prepared 2 packages in 627ms
+Installed 2 packages in 1ms
+ + example==0.1.0 (from file:///home/user/example)
+ + ruff==0.5.0
+$ uv run ruff check
+All checks passed!
+
+### Tools
+$ uv tool install ruff
+Resolved 1 package in 6ms
+Installed 1 package in 2ms
+ + ruff==0.5.0
+Installed 1 executable: ruff
+
+$ ruff --version
+ruff 0.5.0
+</code></pre>
+<ul>
+<li>.... otherwise</li>
+</ul>
+<pre><code>    python3 -m venv venv
+    source venv/bin/activate
+    pip3 install -r requirements.txt
+    python3 main.py
+    deactivate
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="android"><a class="header" href="#android">Android</a></h1>
+<ul>
+<li>
+<p>How to list the avds available on the computer</p>
+<p><code>$ANDROID_HOME/emulator/emulator -list-avds</code></p>
+</li>
+<li>
+<p>How to start an avd</p>
+<p><code>$ANDROID_HOME/emulator/emulator -avd &lt;avd-name&gt;</code></p>
+</li>
+<li>
+<p>What is the default location of the develop app built for Android in gradle</p>
+<p><code>./build/outputs/apk/develop/debug/app.apk</code></p>
+</li>
+<li>
+<p>What is the default location of the test app (using Espresso)</p>
+<p><code> ./build/outputs/apk/androidTest/develop/debug/app.apk</code></p>
+</li>
+<li>
+<p>How to run single instrumentation test class (-q is for quiet). For multiple classes, they can be comma-separated</p>
+<p><code>./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=&lt;full classpath&gt;#&lt;test name&gt; &lt;app&gt;:connected&lt;Variant Name&gt;AndroidTest</code></p>
+</li>
+<li>
+<p>How to run a single instrumentation test (-q is for quiet)</p>
+<p><code>./gradlew -q -Pandroid.testInstrumentationRunnerArguments.class=&lt;full classpath&gt; &lt;app&gt;:connected&lt;Variant Name&gt;AndroidTest</code></p>
+</li>
+<li>
+<p>How to run an instrumented test using adb</p>
+<p><code>./gradlew install&lt;Variant Name&gt;AndroidTest</code></p>
+<p><code>adb shell am instrument -w -e class com.example.MyInstrumentationTest#testFoo  com.example.test/android.support.test.runner.AndroidJUnitRunner</code></p>
+</li>
+<li>
+<p>How to list all dependencies for an app</p>
+<p><code>./gradlew app:dependencies</code></p>
+<p>For more insights:</p>
+<p><code>./gradlew :app:dependencyInsight --configuration compile --dependency &lt;name&gt;</code></p>
+<p><code>./gradlew :app:dependencyInsight --configuration testCompile --dependency &lt;name&gt;</code></p>
+<p><code>./gradlew :app:dependencyInsight --configuration androidTestCompile --dependency &lt;name&gt;</code></p>
+</li>
+<li>
+<p>How to compile and run a dex file directly on an Android phone</p>
+<pre><code>javac &lt;file.java&gt;
+java &lt;classname&gt;
+dx –dex –output=&lt;file.dex&gt; &lt;file.class&gt;
+adb push &lt;file.dex&gt; &lt;/data/local/tmp&gt;
+adb shell dalvikvm –cp &lt;/data/local/tmp&gt;&lt;file.dex&gt; &lt;classname&gt;
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="android-debug-bridge-adb"><a class="header" href="#android-debug-bridge-adb">Android Debug Bridge (adb)</a></h1>
+<ul>
+<li>
+<p>How to use the laptop as server reachable froma connected Android phone: <code>adb reverse tcp:3000 tcp:3000</code></p>
+</li>
+<li>
+<p>Summary of useful adb commands <a href="https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8">from here</a></p>
+</li>
+</ul>
+<pre><code>adb help // List all comands
+
+== Adb Server
+adb kill-server
+adb start-server 
+
+== Adb Reboot
+adb reboot
+adb reboot recovery 
+adb reboot-bootloader
+adb root //restarts adb with root permissions
+
+== Shell
+adb shell    // Open or run commands in a terminal on the host Android device.
+
+== Devices
+adb usb
+adb devices   //show devices attached
+adb devices -l //devices (product/model)
+adb connect ip_address_of_device
+
+== Get device android version
+adb shell getprop ro.build.version.release 
+
+== LogCat
+adb logcat
+adb logcat -c // clear // The parameter -c will clear the current logs on the device.
+adb logcat -d &gt; [path_to_file] // Save the logcat output to a file on the local system.
+adb bugreport &gt; [path_to_file] // Will dump the whole device information like dumpstate, dumpsys and logcat output.
+
+== Files
+adb push [source] [destination]    // Copy files from your computer to your phone.
+adb pull [device file location] [local file location] // Copy files from your phone to your computer.
+
+== App install
+adb -e install path/to/app.apk
+
+-d                        - directs command to the only connected USB device...
+-e                        - directs command to the only running emulator...
+-s &lt;serial number&gt;        ...
+-p &lt;product name or path&gt; ...
+The flag you decide to use has to come before the actual adb command:
+
+adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X install -r com.myAppPackage // Install the given app on all connected devices.
+
+== Uninstalling app from device
+adb uninstall com.myAppPackage
+adb uninstall &lt;app .apk name&gt;
+adb uninstall -k &lt;app .apk name&gt; -&gt; "Uninstall .apk withour deleting data"
+
+adb shell pm uninstall com.example.MyApp
+adb shell pm clear [package] // Deletes all data associated with a package.
+
+adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X uninstall com.myAppPackage //Uninstall the given app from all connected devices
+
+== Update app
+adb install -r yourApp.apk  //  -r means re-install the app and keep its data on the device.
+adb install –k &lt;.apk file path on computer&gt; 
+
+== Home button
+adb shell am start -W -c android.intent.category.HOME -a android.intent.action.MAIN
+
+== Activity Manager
+adb shell am start -a android.intent.action.VIEW
+adb shell am broadcast -a 'my_action'
+
+adb shell am start -a android.intent.action.CALL -d tel:+972527300294 // Make a call
+
+// Open send sms screen with phone number and the message:
+adb shell am start -a android.intent.action.SENDTO -d sms:+972527300294   --es  sms_body "Test --ez exit_on_sent false
+
+// Reset permissions
+adb shell pm reset-permissions -p your.app.package 
+adb shell pm grant [packageName] [ Permission]  // Grant a permission to an app. 
+adb shell pm revoke [packageName] [ Permission]   // Revoke a permission from an app.
+
+
+// Emulate device
+adb shell wm size 2048x1536
+adb shell wm density 288
+// And reset to default
+adb shell wm size reset
+adb shell wm density reset
+
+== Print text
+adb shell input text 'Wow, it so cool feature'
+
+== Screenshot
+adb shell screencap -p /sdcard/screenshot.png
+
+$ adb shell
+shell@ $ screencap /sdcard/screen.png
+shell@ $ exit
+$ adb pull /sdcard/screen.png
+
+---
+adb shell screenrecord /sdcard/NotAbleToLogin.mp4
+
+$ adb shell
+shell@ $ screenrecord --verbose /sdcard/demo.mp4
+(press Control + C to stop)
+shell@ $ exit
+$ adb pull /sdcard/demo.mp4
+
+== Key event
+adb shell input keyevent 3 // Home btn
+adb shell input keyevent 4 // Back btn
+adb shell input keyevent 5 // Call
+adb shell input keyevent 6 // End call
+adb shell input keyevent 26  // Turn Android device ON and OFF. It will toggle device to on/off status.
+adb shell input keyevent 27 // Camera
+adb shell input keyevent 64 // Open browser
+adb shell input keyevent 66 // Enter
+adb shell input keyevent 67 // Delete (backspace)
+adb shell input keyevent 207 // Contacts
+adb shell input keyevent 220 / 221 // Brightness down/up
+adb shell input keyevent 277 / 278 /279 // Cut/Copy/Paste
+
+0 --&gt;  "KEYCODE_0" 
+1 --&gt;  "KEYCODE_SOFT_LEFT" 
+2 --&gt;  "KEYCODE_SOFT_RIGHT" 
+3 --&gt;  "KEYCODE_HOME" 
+4 --&gt;  "KEYCODE_BACK" 
+5 --&gt;  "KEYCODE_CALL" 
+6 --&gt;  "KEYCODE_ENDCALL" 
+7 --&gt;  "KEYCODE_0" 
+8 --&gt;  "KEYCODE_1" 
+9 --&gt;  "KEYCODE_2" 
+10 --&gt;  "KEYCODE_3" 
+11 --&gt;  "KEYCODE_4" 
+12 --&gt;  "KEYCODE_5" 
+13 --&gt;  "KEYCODE_6" 
+14 --&gt;  "KEYCODE_7" 
+15 --&gt;  "KEYCODE_8" 
+16 --&gt;  "KEYCODE_9" 
+17 --&gt;  "KEYCODE_STAR" 
+18 --&gt;  "KEYCODE_POUND" 
+19 --&gt;  "KEYCODE_DPAD_UP" 
+20 --&gt;  "KEYCODE_DPAD_DOWN" 
+21 --&gt;  "KEYCODE_DPAD_LEFT" 
+22 --&gt;  "KEYCODE_DPAD_RIGHT" 
+23 --&gt;  "KEYCODE_DPAD_CENTER" 
+24 --&gt;  "KEYCODE_VOLUME_UP" 
+25 --&gt;  "KEYCODE_VOLUME_DOWN" 
+26 --&gt;  "KEYCODE_POWER" 
+27 --&gt;  "KEYCODE_CAMERA" 
+28 --&gt;  "KEYCODE_CLEAR" 
+29 --&gt;  "KEYCODE_A" 
+30 --&gt;  "KEYCODE_B" 
+31 --&gt;  "KEYCODE_C" 
+32 --&gt;  "KEYCODE_D" 
+33 --&gt;  "KEYCODE_E" 
+34 --&gt;  "KEYCODE_F" 
+35 --&gt;  "KEYCODE_G" 
+36 --&gt;  "KEYCODE_H" 
+37 --&gt;  "KEYCODE_I" 
+38 --&gt;  "KEYCODE_J" 
+39 --&gt;  "KEYCODE_K" 
+40 --&gt;  "KEYCODE_L" 
+41 --&gt;  "KEYCODE_M" 
+42 --&gt;  "KEYCODE_N" 
+43 --&gt;  "KEYCODE_O" 
+44 --&gt;  "KEYCODE_P" 
+45 --&gt;  "KEYCODE_Q" 
+46 --&gt;  "KEYCODE_R" 
+47 --&gt;  "KEYCODE_S" 
+48 --&gt;  "KEYCODE_T" 
+49 --&gt;  "KEYCODE_U" 
+50 --&gt;  "KEYCODE_V" 
+51 --&gt;  "KEYCODE_W" 
+52 --&gt;  "KEYCODE_X" 
+53 --&gt;  "KEYCODE_Y" 
+54 --&gt;  "KEYCODE_Z" 
+55 --&gt;  "KEYCODE_COMMA" 
+56 --&gt;  "KEYCODE_PERIOD" 
+57 --&gt;  "KEYCODE_ALT_LEFT" 
+58 --&gt;  "KEYCODE_ALT_RIGHT" 
+59 --&gt;  "KEYCODE_SHIFT_LEFT" 
+60 --&gt;  "KEYCODE_SHIFT_RIGHT" 
+61 --&gt;  "KEYCODE_TAB" 
+62 --&gt;  "KEYCODE_SPACE" 
+63 --&gt;  "KEYCODE_SYM" 
+64 --&gt;  "KEYCODE_EXPLORER" 
+65 --&gt;  "KEYCODE_ENVELOPE" 
+66 --&gt;  "KEYCODE_ENTER" 
+67 --&gt;  "KEYCODE_DEL" 
+68 --&gt;  "KEYCODE_GRAVE" 
+69 --&gt;  "KEYCODE_MINUS" 
+70 --&gt;  "KEYCODE_EQUALS" 
+71 --&gt;  "KEYCODE_LEFT_BRACKET" 
+72 --&gt;  "KEYCODE_RIGHT_BRACKET" 
+73 --&gt;  "KEYCODE_BACKSLASH" 
+74 --&gt;  "KEYCODE_SEMICOLON" 
+75 --&gt;  "KEYCODE_APOSTROPHE" 
+76 --&gt;  "KEYCODE_SLASH" 
+77 --&gt;  "KEYCODE_AT" 
+78 --&gt;  "KEYCODE_NUM" 
+79 --&gt;  "KEYCODE_HEADSETHOOK" 
+80 --&gt;  "KEYCODE_FOCUS" 
+81 --&gt;  "KEYCODE_PLUS" 
+82 --&gt;  "KEYCODE_MENU" 
+83 --&gt;  "KEYCODE_NOTIFICATION" 
+84 --&gt;  "KEYCODE_SEARCH" 
+85 --&gt;  "KEYCODE_MEDIA_PLAY_PAUSE"
+86 --&gt;  "KEYCODE_MEDIA_STOP"
+87 --&gt;  "KEYCODE_MEDIA_NEXT"
+88 --&gt;  "KEYCODE_MEDIA_PREVIOUS"
+89 --&gt;  "KEYCODE_MEDIA_REWIND"
+90 --&gt;  "KEYCODE_MEDIA_FAST_FORWARD"
+91 --&gt;  "KEYCODE_MUTE"
+92 --&gt;  "KEYCODE_PAGE_UP"
+93 --&gt;  "KEYCODE_PAGE_DOWN"
+94 --&gt;  "KEYCODE_PICTSYMBOLS"
+...
+122 --&gt;  "KEYCODE_MOVE_HOME"
+123 --&gt;  "KEYCODE_MOVE_END"
+// https://developer.android.com/reference/android/view/KeyEvent.html
+
+
+== ShPref
+# replace org.example.app with your application id
+
+# Add a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value "hello world!"'
+
+# Remove a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'
+
+# Clear all default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'
+
+# It's also possible to specify shared preferences file.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es name Game --es key level --ei value 10'
+
+# Data types
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key string --es value "hello world!"'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key boolean --ez value true'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key float --ef value 3.14159'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key int --ei value 2015'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key long --el value 9223372036854775807'
+
+# Restart application process after making changes
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --ez restart true'
+
+== Monkey
+adb shell monkey -p com.myAppPackage -v 10000 -s 100 // monkey tool is generating 10.000 random events on the real device
+
+== Paths
+/data/data/&lt;package&gt;/databases (app databases)
+/data/data/&lt;package&gt;/shared_prefs/ (shared preferences)
+/data/app (apk installed by user)
+/system/app (pre-installed APK files)
+/mmt/asec (encrypted apps) (App2SD)
+/mmt/emmc (internal SD Card)
+/mmt/adcard (external/Internal SD Card)
+/mmt/adcard/external_sd (external SD Card)
+
+adb shell ls (list directory contents)
+adb shell ls -s (print size of each file)
+adb shell ls -R (list subdirectories recursively)
+
+== Device onformation
+adb get-statе (print device state)
+adb get-serialno (get the serial number)
+adb shell dumpsys iphonesybinfo (get the IMEI)
+adb shell netstat (list TCP connectivity)
+adb shell pwd (print current working directory)
+adb shell dumpsys battery (battery status)
+adb shell pm list features (list phone features)
+adb shell service list (list all services)
+adb shell dumpsys activity &lt;package&gt;/&lt;activity&gt; (activity info)
+adb shell ps (print process status)
+adb shell wm size (displays the current screen resolution)
+dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp' (print current app's opened activity)
+
+== Package info
+adb shell list packages (list package names)
+adb shell list packages -r (list package name + path to apks)
+adb shell list packages -3 (list third party package names)
+adb shell list packages -s (list only system packages)
+adb shell list packages -u (list package names + uninstalled)
+adb shell dumpsys package packages (list info on all apps)
+adb shell dump &lt;name&gt; (list info on one package)
+adb shell path &lt;package&gt; (path to the apk file)
+
+==Configure Settings Commands
+adb shell dumpsys battery set level &lt;n&gt; (change the level from 0 to 100)
+adb shell dumpsys battery set status&lt;n&gt; (change the level to unknown, charging, discharging, not charging or full)
+adb shell dumpsys battery reset (reset the battery)
+adb shell dumpsys battery set usb &lt;n&gt; (change the status of USB connection. ON or OFF)
+adb shell wm size WxH (sets the resolution to WxH)
+
+
+== Device Related Commands
+adb reboot-recovery (reboot device into recovery mode)
+adb reboot fastboot (reboot device into recovery mode)
+adb shell screencap -p "/path/to/screenshot.png" (capture screenshot)
+adb shell screenrecord "/path/to/record.mp4" (record device screen)
+adb backup -apk -all -f backup.ab (backup settings and apps)
+adb backup -apk -shared -all -f backup.ab (backup settings, apps and shared storage)
+adb backup -apk -nosystem -all -f backup.ab (backup only non-system apps)
+adb restore backup.ab (restore a previous backup)
+adb shell am start|startservice|broadcast &lt;INTENT&gt;[&lt;COMPONENT&gt;]
+-a &lt;ACTION&gt; e.g. android.intent.action.VIEW
+-c &lt;CATEGORY&gt; e.g. android.intent.category.LAUNCHER (start activity intent)
+
+adb shell am start -a android.intent.action.VIEW -d URL (open URL)
+adb shell am start -t image/* -a android.intent.action.VIEW (opens gallery)
+
+== Logs
+adb logcat [options] [filter] [filter] (view device log)
+adb bugreport (print bug reports)
+
+== Other
+adb backup // Create a full backup of your phone and save to the computer.
+adb restore // Restore a backup to your phone.
+adb sideload //  Push and flash custom ROMs and zips from your computer.
+
+fastboot devices
+// Check connection and get basic information about devices connected to the computer.
+// This is essentially the same command as adb devices from earlier. 
+//However, it works in the bootloader, which ADB does not. Handy for ensuring that you have properly established a connection.
+
+
+--------------------------------------------------------------------------------
+Shared Preferences
+
+# replace org.example.app with your application id
+
+# Add a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value "hello world!"'
+
+# Remove a value to default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'
+
+# Clear all default shared preferences.
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'
+
+# It's also possible to specify shared preferences file.
+adb shell 'am broadcast -a org.example.app.sp.PUT --es name Game --es key level --ei value 10'
+
+# Data types
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key string --es value "hello world!"'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key boolean --ez value true'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key float --ef value 3.14159'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key int --ei value 2015'
+adb shell 'am broadcast -a org.example.app.sp.PUT --es key long --el value 9223372036854775807'
+
+# Restart application process after making changes
+adb shell 'am broadcast -a org.example.app.sp.CLEAR --ez restart true'
+--------------------------------------------------------------------------------
+
+=== Few bash snippets ===
+@Source (https://jonfhancock.com/bash-your-way-to-better-android-development-1169bc3e0424)
+
+=== Using tail -n
+//Use tail to remove the first line. Actually two lines. The first one is just a newline. The second is “List of devices attached.”
+$ adb devices | tail -n +2
+
+=== Using cut -sf
+// Cut the last word and any white space off the end of each line.
+$ adb devices | tail -n +2 | cut -sf -1
+
+=== Using xargs -I
+// Given the -I option, xargs will perform an action for each line of text that we feed into it.
+// We can give the line a variable name to use in commands that xargs can execute.
+$ adb devices | tail -n +2 | cut -sf -1 | xargs -I X echo X aw yiss
+
+=== Three options below together
+// Will print android version of all connected devices
+adb devices | tail -n +2 | cut -sf -1 | xargs -I X adb -s X shell getprop ro.build.version.release  
+
+=== Using alias
+-- Example 1 
+alias tellMeMore=echo
+tellMeMore "hi there"
+Output =&gt; hi there
+-- Example 2
+// Define alias
+alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
+// And you can use it later 
+apkinstall ~/Downloads/MyAppRelease.apk  // Install an apk on all devices
+-- Example 3
+alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall $1"
+rmapp com.example.myapp // Uninstall a package from all devices
+-- Example 4
+alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear $1"
+clearapp com.example.myapp  // Clear data on all devices (leave installed)
+-- Example 5
+alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start $1"
+startintent https://twitter.com/JonFHancock // Launch a deep link on all devices
+
+
+Setting up your .bash_profile
+Finally, to make this all reusable even after rebooting your computer (aliases only last through the current session), we have to add these to your .bash_profile. You might or might not already have a .bash_profile, so let’s make sure we append to it rather than overwriting it. Just open a terminal, and run the following command
+
+touch .bash_profile &amp;&amp; open .bash_profile
+
+This will create it if it doesn’t already exist, and open it in a text editor either way. Now just copy and paste all of the aliases into it, save, and close.
+
+alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start $1"
+alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
+alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall $1"
+alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear $1"
+
+
+===============================================================
+Sources:
+- Internet
+- https://www.automatetheplanet.com/adb-cheat-sheet/
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ansible"><a class="header" href="#ansible">Ansible</a></h1>
+<ul>
+<li>
+<p>How to learn the basics of Ansible: <a href="https://www.redhat.com/en/services/training/do007-ansible-essentials-simplicity-automation-technical-overview?extIdCarryOver=true&amp;sc_cid=701f2000001OH7YAAW&amp;section=Overview">Basic course</a></p>
+</li>
+<li>
+<p>How to run commands directly</p>
+<pre><code>ansible -i agents.txt all -a 'zsh -c "ls"'
+</code></pre>
+</li>
+<li>
+<p>How to run commands with a playbook</p>
+<pre><code>ansible-playbook -i agents.txt commands.yml
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="utilities-with-automator"><a class="header" href="#utilities-with-automator">Utilities with Automator</a></h1>
+<h2 id="how-to-paste-the-cliboard-as-keyboard-for-the-apps-that-dont-allow-cmd-v-eg-for-security"><a class="header" href="#how-to-paste-the-cliboard-as-keyboard-for-the-apps-that-dont-allow-cmd-v-eg-for-security">How to paste the cliboard as keyboard for the apps that don't allow cmd-v (e.g. for security)</a></h2>
+<ul>
+<li>Launch Automator (yup it comes with BigSur and already installed, no need to install it)</li>
+<li>New Document</li>
+<li>Click Quick Action</li>
+<li>Change "Workflow Receives" to "No Input"</li>
+<li>On the left scroll down and double click "Run AppleScript"</li>
+<li>Erase the Template Text and Paste the Code above "I used the basic workflow script" (you dont need both scripts)</li>
+<li>Save the Script - I called mine Clip2Keystrokes
+NOTE: You will need to add the Automator and ANY app you plan to run this script on to the Accessibility Permissions.</li>
+<li>Copy your text to the clipboard</li>
+<li>Then switch to the App you want to paste in (in my case it was a Teamviewer session)</li>
+<li>Click the App name in the top left (next to the apple icon), you will see a Services Menu option.</li>
+<li>Mouse over the Services menu and you will see your script name, "Clip2Keystrokes" in my case.</li>
+<li>Be sure the cursor is already where you need it to be as clicking on the script will cause it to start typing.</li>
+</ul>
+<h3 id="the-script"><a class="header" href="#the-script">The script</a></h3>
+<pre><code class="language-AppleScript">on run
+    tell application "System Events"
+        keystroke (the clipboard)
+    end tell
+end run
+</code></pre>
+<p><a href="https://gist.github.com/sscotth/310db98e7c4ec74e21819806dc527e97">Source</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="random-notes-on-aws"><a class="header" href="#random-notes-on-aws">Random notes on AWS</a></h1>
+<ol>
+<li>
+<p>How to send an email using SES</p>
+<pre><code>sudo pip install awscli
+aws configure
+aws ses send-email \
+--from "john@gmail.com" \
+--destination "ToAddresses=mike@gmail.com" \
+--message "Subject={Data=from ses,Charset=utf8},Body={Text={Data=ses says hi,Charset=utf8},Html={Data=,Charset=utf8}}"
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="random-notes-on-azure"><a class="header" href="#random-notes-on-azure">Random notes on Azure</a></h1>
+<ul>
+<li>
+<p>How to set an organization as default using the az cli</p>
+<pre><code>az devops configure --defaults organization &lt;organization url, e.g. https://dev.azure.com/...&gt;
+</code></pre>
+</li>
+<li>
+<p>How to set a Personal Access Token (PAT) for all az commands</p>
+<pre><code>export AZURE_DEVOPS_EXT_PAT=&lt;personal_pat&gt;
+</code></pre>
+</li>
+<li>
+<p>How to use git with PAT: <a href="https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&amp;tabs=Linux">PAT tokens with git</a>.<br />
+(also works using "Authorization: Bearer $PAT" instead of basic and b64).<br />
+For git LFS use something like:</p>
+<pre><code>git config http.$origin_url.extraheader "AUTHORIZATION: bearer $SYSTEM_ACCESSTOKEN"
+git fetch -f origin develop:develop
+git config --unset http.$origin_url.extraheader
+</code></pre>
+</li>
+<li>
+<p>How to get the list of builds for a pipeline</p>
+<pre><code>az pipelines build list --project &lt;projectname&gt; --definition-ids &lt;definition_id&gt;
+</code></pre>
+</li>
+<li>
+<p>How to enforce using Java 11 in Azure DevOps pipelines</p>
+<pre><code>- script: |
+    echo "##vso[task.setvariable variable=JAVA_HOME]$(JAVA_HOME_11_X64)"
+    echo "##vso[task.setvariable variable=PATH]$(JAVA_HOME_11_X64)/bin:$(PATH)"
+  displayName: "Set java 11"
+</code></pre>
+</li>
+<li>
+<p>How to create WorkItems in Azure boards via cli: <a href="https://docs.microsoft.com/en-us/cli/azure/boards/work-item?view=azure-cli-latest#az-boards-work-item-create">Create work items in Azure Boards</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/bash?view=azure-devops">Set a full environment in Bash</a></p>
+</li>
+<li>
+<p>How to call the Azure DevOps REST API:
+Get PAT Token
+Make REST call using Basic Authentication with username and PAT (as password)
+e.g.</p>
+<pre><code>curl "https://dev.azure.com/cbsp-abnamro/_apis/projects?api-version=7.0" -u "mario.negro.ponzi:&lt;PAT&gt;"
+</code></pre>
+<ul>
+<li>Also usfeul: <a href="https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-rest">REST call with Azure CLI</a></li>
+</ul>
+</li>
+<li>
+<p>How to create Azure Functions with the REST API: <a href="https://zikalino.github.io/blog/2019/03/27/creating-azure-function-app-using-rest-api/">Creating Azure Function with REST API</a></p>
+</li>
+<li>
+<p>How to edit a PAT via REST API: <a href="https://docs.microsoft.com/en-us/rest/api/azure/devops/tokens/pats/create?view=azure-devops-rest-7.1">PAT Editing REST API</a></p>
+</li>
+<li>
+<p>How to format the output in the pipelines in azure DevOps: <a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&amp;tabs=bash#formatting-commands">Format output</a><br />
+TL;DR</p>
+<pre><code>##[group]Beginning of a group
+##[warning]Warning message
+##[error]Error message
+##[section]Start of a section
+##[debug]Debug text
+##[command]Command-line being run
+##[endgroup]
+</code></pre>
+</li>
+<li>
+<p>How to use pipeline parameters and read them in a bash script</p>
+<pre><code>parameters:
+- name: publish
+  displayName: Publish?
+  type: boolean
+  default: true
+
+...
+
+- bash: |
+  echo ${{ parameters.publish }}
+
+  if [ ${{ parameters.publish }} == 'True' ]
+  then
+    echo "true"
+  else
+    echo "false"
+  fi
+displayName: 'Echo and check'
+
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bash"><a class="header" href="#bash">Bash</a></h1>
+<ul>
+<li>
+<p><a href="https://devhints.io/bash">Cheat sheet</a></p>
+</li>
+<li>
+<p><a href="http://redsymbol.net/articles/unofficial-bash-strict-mode">Bash Strict Mode</a> and <a href="https://sipb.mit.edu/doc/safe-shell/#:~:text=set%20%2Do%20pipefail%20causes%20a,command%20in%20a%20pipeline%20errors.">Safe shell scripts</a></p>
+</li>
+<li>
+<p><a href="https://linuxhint.com/echo-shell-commands-as-executed-bash/">Echo commands</a></p>
+</li>
+<li>
+<p><a href="https://www.soberkoder.com/better-zsh-history/">Better zsh history</a></p>
+</li>
+<li>
+<p>zip all files returned by find<br />
+<code>find ./report -maxdepth 1 -name '*.csv' | zip ./report/report.zip -m@</code></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bazel"><a class="header" href="#bazel">Bazel</a></h1>
+<ul>
+<li><a href="https://bazel.build/">Main site</a></li>
+<li><a href="https://docs.bazel.build/versions/4.2.1/tutorial/java.html">Tutorial Java</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bookmarks"><a class="header" href="#bookmarks">Bookmarks</a></h1>
+<ul>
+<li>
+<p><a href="slint.dev">Slint</a>: GUI for embedded systems, written in Rust, support Rust, javascript, C++</p>
+</li>
+<li>
+<p><a href="https://dortania.github.io/OpenCore-Legacy-Patcher/">OpenCore Legacy Patcher</a>: Patch system to install the latest macOS on old systems</p>
+</li>
+<li>
+<p><a href="https://www.balthisar.com/blog/bundle-the-jre/">Bundle the Java JRE into your macOS application</a></p>
+</li>
+<li>
+<p><a href="https://centerkey.com/mac/java/">Package Java app as native macOS app</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/swift2go/embedding-python-interpreter-inside-a-macos-app-and-publish-to-app-store-successfully-309be9fb96a5">Embedding a Python interpreter inside a MacOS/iOS app</a></p>
+</li>
+<li>
+<p><a href="https://screeps.com/">Screeps</a>: Programmable Game</p>
+</li>
+<li>
+<p><a href="https://gladiabots.com/">Gladiabots</a>: Programmable Game</p>
+</li>
+<li>
+<p><a href="https://www.cursorless.org/">Cursorless</a>: Voice programming</p>
+</li>
+<li>
+<p><a href="https://chaosparrot.github.io/talon_practice/">Talon Excercises</a>: Practice Talon Voice</p>
+</li>
+<li>
+<p><a href="https://twinery.org/">Twine/Twinery</a>: Tool for interactive non linear stories</p>
+</li>
+<li>
+<p><a href="https://www.lisenet.com/2022/how-to-download-view-only-teams-meeting-recording-video-from-sharepoint/">How to download videos from Teams/Stream</a>:</p>
+<blockquote>
+<p>Open Firefox (or the browser of your choice) and load the SharePoint page with the video that you want to download, then open the page inspector (Ctrl + Shift + C). Click on the Network tab. Type videomanifest where it says "Filter URLs". Press F5 to refresh the page. When the page reloads, copy the file URL. Use ffmpeg to download the video by pasting     the URL from above:
+ffmpeg -i "https://copied_videomanifest_url" -codec copy video.mp4
+UPD: If you have an error (cannot parse file etc.) probably videomanifest url requires credentials.
+Then instead of copying the url you can 'Copy Response' and save it to the file (e.g. paste response to notepad and save the file).
+In the command line above replace the url by path to the saved file</p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://carbon.now.sh/">Carbon.sh</a>: Create and share beautiful images of your source code</p>
+</li>
+<li>
+<p><a href="https://github.com/myles/awesome-static-generators">Awesome Static Website Generators</a>: curated list of static web sites generators</p>
+</li>
+<li>
+<p><a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI code generator</a></p>
+</li>
+<li>
+<p><a href="https://github.com/sys-001/telegram-bot-api-versions/tree/main/files/openapi/yaml">Telegram bot APIs versioned</a></p>
+</li>
+<li>
+<p><a href="https://world.hey.com/dhh/merchants-of-complexity-4851301b">Merchants of complexity</a></p>
+</li>
+</ul>
+<h2 id="rust"><a class="header" href="#rust">Rust</a></h2>
+<ul>
+<li><a href="https://stevedonovan.github.io/rust-gentle-intro/readme.html">A Gentle Introduction To Rust</a></li>
+<li><a href="https://doc.rust-lang.org/book/">Rust book</a></li>
+<li><a href="https://slint.dev/">Slint</a>: cross-platform language-agnostic UI library for desktop and embedded, not only for Rust</li>
+</ul>
+<hr />
+<h2 id="to-be-checked"><a class="header" href="#to-be-checked">To be checked</a></h2>
+<ul>
+<li><a href="https://www.virtualhere.com/osx_server_software">Virtual USB aka USB over internet</a></li>
+<li><a href="https://santa.dev/">Santa</a>: Santa is a binary and file access authorization system for macOS.</li>
+<li><a href="https://hono.dev/">Hono</a>: Fast lightweight JS "edge" framework</li>
+<li><a href="https://jestjs.io/">Jest</a>: Testing in JS</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="certificates"><a class="header" href="#certificates">Certificates</a></h1>
+<ul>
+<li><a href="https://akrabat.com/syncing-macos-keychain-certificates-with-homebrews-openssl/">Old reference</a></li>
+<li><a href="https://gist.github.com/alvarow/1a42e608d74474ac39aa">OpenSSL Cheat</a></li>
+<li><a href="https://docs.pingidentity.com/bundle/solution-guides/page/iqs1569423823079.html">How to use OpenSSL to test SSL connectivity</a></li>
+<li><a href="https://serverfault.com/questions/254627/how-do-i-convert-a-cer-certificate-to-pem">How to convert cer to pem</a></li>
+<li><a href="https://gist.github.com/therealmarv/10103946">How to check Python openssl</a></li>
+<li><a href="https://cheapsslsecurity.com/blog/various-types-ssl-commands-keytool/">Various OpenSSL commands</a></li>
+</ul>
+<h2 id="java"><a class="header" href="#java">Java</a></h2>
+<ul>
+<li>See also <a href="./java.html">here</a></li>
+</ul>
+<h2 id="new"><a class="header" href="#new">New</a></h2>
+<p>If one needs to add root certificates (e.g. because inside a corporate network) on macOS, having it in the keychain is not enough.</p>
+<p>Root certificates must be added to all tools using their own keychain/keystore.</p>
+<ul>
+<li>Download the .cer and .pem file from the Keychain</li>
+<li>Get pem directly via cli:
+<pre><code>openssl s_client -showcerts -connect server.edu:443 &lt;/dev/null 2&gt;/dev/null|openssl x509 -outform PEM &gt;mycertfile.pem
+</code></pre>
+</li>
+<li>Android Studio (or similar Java)
+<pre><code>"/Applications/Android Studio.app/Contents/jre/Contents/Home/bin/keytool" -import -keystore "/Applications/Android Studio.app/Contents/jre/Contents/Home/lib/security/cacerts" -file "$HOME/Downloads/MYROOT.cer" -alias "MYROOT"
+</code></pre>
+</li>
+<li>Python
+<pre><code>... libexec/lib/python3.10/site-packages/certifi/cacert.pem
+... libexec/lib/python3.10/site-packages/pip/_vendor/certifi/cacert.pem
+</code></pre>
+</li>
+<li>Ruby
+<pre><code>export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+</code></pre>
+(and possibly also export PATH="/usr/local/opt/openssl@1.1/bin:$PATH")</li>
+<li>Npm
+<pre><code>npm config set cafile "$HOME/Downloads/certificates/MYROOT.pem"
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cli"><a class="header" href="#cli">CLI</a></h1>
+<ol>
+<li>
+<p>How to get the CPU name<br />
+<code>sysctl -a | grep machdep.cpu.brand_string</code></p>
+</li>
+<li>
+<p>How to get system info<br />
+<code>system_profiler SPSoftwareDataType SPHardwareDataType</code></p>
+</li>
+<li>
+<p>Collection #1: https://switowski.com/blog/favorite-cli-tools</p>
+</li>
+<li>
+<p>Collection #2: from <a href="https://twitter.com/amilajack/status/1479328649820000256?s=27">here</a></p>
+<ol>
+<li><code>bat</code> is <code>cat</code> with syntax highlighting and line numbers</li>
+<li>diff-so-fancy shows best-looking diffs you'll ever see</li>
+<li>fx is the best JSON viewer you'll ever use</li>
+<li>fzf is an insanely fast fuzzy search written in @golang</li>
+<li>exa is <code>ls</code> but with coloring</li>
+<li>duff shows a better du summary</li>
+<li>htop is a modern <code>top</code> replacement</li>
+<li>hexyl is a beautiful hex viewer</li>
+<li>@fig is next-gen autocompletion</li>
+</ol>
+</li>
+<li>
+<p>restart from terminal<br />
+<code>sudo shutdown -r now</code></p>
+</li>
+<li>
+<p>sudo with no password</p>
+<pre><code>sudo visudo
+...
+&lt;username&gt; ALL=(ALL) NOPASSWD:ALL
+</code></pre>
+<p>If one wants to just increase the time before re-entering the sudo password, add</p>
+<pre><code>Defaults    timestamp_timeout=3
+</code></pre>
+</li>
+<li>
+<p>update command line tools</p>
+<pre><code class="language-bash">sudo xcode-select -s /Applications/Xcode_13.2.1.app
+sudo rm -rf /Library/Developer/CommandLineTools
+sudo xcode-select --install
+softwareupdate --all --install --force
+</code></pre>
+<p>Note: this leaves the popup open in the GUI...</p>
+</li>
+<li>
+<p>Create a build agent like those on Github</p>
+<p>https://github.com/actions/virtual-environments/issues/1783
+https://github.com/actions/virtual-environments/blob/main/images/macos/templates/macOS-12.json</p>
+</li>
+<li>
+<p>Check which process is listening to which port</p>
+<pre><code class="language-bash">sudo lsof -nP -i4TCP:$POST | grep LISTEN
+</code></pre>
+</li>
+<li>
+<p>Follow the end of a log (e.g. mongo)</p>
+<pre><code class="language-bash">tail -f /opt/homebrew/var/log/mongodb/mongo.log
+</code></pre>
+</li>
+<li>
+<p>access the keychain from cli. In the command $USER refer to the current user keychain <a href="https://medium.com/@johnjjung/how-to-store-sensitive-environment-variables-on-macos-76bd5ba464f6">source</a></p>
+<pre><code class="language-bash"># store environment variable
+security add-generic-password -a "$USER" -s 'name_of_your_key' -w 'passphrase'
+# retrieve key to environment variable
+security find-generic-password -a "$USER" -s 'name_of_your_key' -w
+# store it locally
+NAME_OF_YOUR_KEY=$(security find-generic-password -a "$USER" -s "name_of_your_key" -w)
+# or
+NAME_OF_YOUR_KEY=`security find-generic-password -a "$USER" -s 'name_of_your_key' -w`
+</code></pre>
+</li>
+<li>
+<p>Debug startup time in the terminal</p>
+<p>Write all steps in the file <code>trace</code></p>
+<pre><code class="language-bash">PS4='+%D{%s.%9.}:%N:%i&gt;' zsh -c -i -x exit &gt; trace 2&gt;&amp;1
+</code></pre>
+<p>Make times differential</p>
+<pre><code class="language-bash">&lt;trace awk -F: '{printf "+%.09f", $1 - t; t=$1; $1=""; print}'
+</code></pre>
+</li>
+<li>
+<p>Prevent word wrap: <code>tput rmam</code></p>
+</li>
+<li>
+<p>Restore word wrap: <code>tput smam</code></p>
+</li>
+<li>
+<p>Timing shell commands: <code>set -x</code>, disabling it: <code>set +x</code></p>
+</li>
+<li>
+<p>get process that has a port open <code>sudo lsof -nP -i4TCP:$PORT | grep LISTEN</code></p>
+</li>
+<li>
+<p>force macOS to sync time: <code>sudo sntp -sS time.apple.com</code></p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="curlhttpie"><a class="header" href="#curlhttpie">curl/httpie</a></h1>
+<h2 id="curl"><a class="header" href="#curl">curl</a></h2>
+<ul>
+<li>
+<p>Follow redirects<br />
+<code>curl -L ...</code></p>
+</li>
+<li>
+<p>Upload form file:</p>
+<pre><code>curl -F ‘data=@path/to/local/file’ UPLOAD_ADDRESS
+</code></pre>
+</li>
+<li>
+<p>Add user agent</p>
+<pre><code>curl -A "user-agent-name-here" [URL]
+e.g. "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0"
+</code></pre>
+</li>
+<li>
+<p>Download file: <code>curl -L -o do-bots.txt  https://www.digitalocean.com/robots.txt</code></p>
+</li>
+<li>
+<p>Access Token DevOps with git</p>
+<pre><code>MY_PAT=yourPAT # replace "yourPAT" with "PatStringFromWebUI"
+B64_PAT=$(printf ":%s" "$MY_PAT" | base64)
+git -c http.extraHeader="Authorization: Basic ${B64_PAT}" clone https://dev.azure.com/yourOrgName/yourProjectName/_git/yourRepoName
+</code></pre>
+</li>
+<li>
+<p>Access Token DevOps with curl (e.g. for feed)</p>
+<pre><code>MY_PAT=yourPAT # replace "yourPAT" with "PatStringFromWebUI"
+B64_PAT=$(printf ":%s" "$MY_PAT" | base64)
+curl -L -H "Authorization: Basic ${B64_PAT}" "https://feeds.dev.azure.com/${org}/${project}}/_apis/Packaging/Feeds/$feed/Packages" | jq ".value[0].versions[0].version
+</code></pre>
+</li>
+<li>
+<p>Extra header</p>
+<pre><code>curl https://whatever
+ -H "X-Custom-Header: value"
+ -H "Content-Type: application/json"
+ -H "Authorization: bearer ********"
+</code></pre>
+</li>
+<li>
+<p>Extra header</p>
+<pre><code>curl https://whatever
+ -H "X-Custom-Header: value"
+ -H "Content-Type: application/json"
+ -H "Authorization: basic ********"
+</code></pre>
+</li>
+</ul>
+<h2 id="httpie"><a class="header" href="#httpie">httpie</a></h2>
+<ul>
+<li><a href="https://httpie.io/docs">Docs</a></li>
+<li><a href="https://devhints.io/httpie">Cheatsheet</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dart"><a class="header" href="#dart">Dart</a></h1>
+<ol>
+<li>create dart cli project
+<pre><code>dart create -t console-full cli
+</code></pre>
+</li>
+<li><a href="https://pub.dev/packages/shell">shell interaction lib</a></li>
+<li>add dependency from cli
+<pre><code>dart pub add [--dev] [test]
+</code></pre>
+</li>
+<li>run dart cli
+<code>dart run</code></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="docker-macos"><a class="header" href="#docker-macos">Docker (macOS)</a></h1>
+<ul>
+<li>
+<p>Install Docker Desktop with either:</p>
+<ul>
+<li><code>brew install docker --cask</code></li>
+<li>download from <a href="https://www.docker.com/products/docker-desktop/">Docker</a></li>
+</ul>
+</li>
+<li>
+<p>Install Docker CLI with: <code>brew install docker</code></p>
+</li>
+<li>
+<p>Add to the PATH the credential desktop: <code>export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin</code></p>
+</li>
+<li>
+<p>Login to the images repo: <code>docker login -u &lt;username&gt; -p &lt;password&gt; &lt;url&gt;:&lt;port&gt;</code></p>
+</li>
+<li>
+<p>Try ubuntu: <code>docker pull ubuntu</code></p>
+</li>
+<li>
+<p>Check it is there: <code>docker images</code></p>
+</li>
+<li>
+<p>Run it interactively and attach to terminal: <code>docker run -i -t  ubuntu /bin/bash</code> (<code>-d</code> also runs in background)</p>
+</li>
+<li>
+<p>Create a folder <code>folder</code></p>
+</li>
+<li>
+<p>Create a Dockerfile within <code>folder</code> like</p>
+<pre><code class="language-Docker">FROM ubuntu
+RUN apt-get update 
+RUN apt-get install –y python3 curl
+CMD [“echo”,”Image created”] 
+</code></pre>
+</li>
+<li>
+<p>Build and tag the image: <code>docker build -t ubuntu-python folder</code></p>
+</li>
+<li>
+<p>Run interactively the tagged iamge: <code>docker run -i -t ubuntu-python /bin/bash</code></p>
+</li>
+<li>
+<p>Inside the image check which version of Python got installed: <code>python3 --version</code></p>
+</li>
+<li>
+<p>Exit: <code>exit</code></p>
+</li>
+<li>
+<p>List containers: <code>docker container ls -a</code></p>
+</li>
+<li>
+<p>Remove container: <code>docker container rm &lt;container_id&gt; ...</code></p>
+</li>
+<li>
+<p>List images: <code>docker image ls</code></p>
+</li>
+<li>
+<p>Remove images: <code>docker image rm &lt;image name or id&gt;</code></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="english"><a class="header" href="#english">English</a></h1>
+<ul>
+<li><a href="https://github.com/dwyl/english-words">Words list</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="expect"><a class="header" href="#expect">Expect</a></h1>
+<p>Automate the terminal. E.g.</p>
+<pre><code class="language-shell">#!/bin/bash
+echo "Hello, who are you?"
+read $REPLY
+echo "Can I ask you some questions?"
+read $REPLY
+echo "What is your favorite topic?"
+read $REPLY
+</code></pre>
+<pre><code class="language-shell">#!/usr/bin/expect -f
+set timeout -1
+spawn ./questions
+expect "Hello, who are you?\r"
+send -- "Im Adam\r"
+expect "Can I ask you some questions?\r"
+send -- "Sure\r"
+expect "What is your favorite topic?\r"
+send -- "Technology\r"
+expect eof
+</code></pre>
+<p>The second can be called directly.</p>
+<p>Important comands for expect are:</p>
+<ol>
+<li>spawn	Starts a script or a program.</li>
+<li>expect	Waits for program output.</li>
+<li>send	Sends a reply to your program.</li>
+<li>interact	Allows you to interact with your program.</li>
+</ol>
+<p><a href="https://likegeeks.com/expect-command/">Source</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fastlane"><a class="header" href="#fastlane">Fastlane</a></h1>
+<p>Assuming <em>Fastlane match</em> is setup and profiles are stored in a git repo.</p>
+<ol>
+<li>Create the bundle id in the Apple portal</li>
+<li>Add a development profile using match
+<pre><code>bundle exec fastlane match development --app_identifier "com.negroponzi.dev.*"
+</code></pre>
+</li>
+<li>have all team use it
+<pre><code>bundle exec fastlane match --readonly development
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flutter"><a class="header" href="#flutter">Flutter</a></h1>
+<ul>
+<li>Create project: <code>flutter create --project-name [project_name] --org com.negroponzi [project_folder]</code></li>
+<li>List existing emulators: <code>flutter emulators</code></li>
+<li>Launch iOS simulator: <code>flutter emulators --launch apple_ios_simulator</code></li>
+<li>List running devices and emulators: <code>flutter devices</code></li>
+<li>Run app on a specific device: <code>flutter run -d [device_id]</code></li>
+<li>Add package; <code>flutter pub add provider</code></li>
+<li>Run all tests: <code>flutter test</code></li>
+<li>Run specific test (regex): <code>flutter test --name="Counter value should.*"</code></li>
+<li><a href="https://medium.com/codechai/testing-provider-in-flutter-8fe3876796e1">Testing Provider</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fd"><a class="header" href="#fd">fd</a></h1>
+<ul>
+<li>
+<p>patterns are by default but do not forget the quotes!</p>
+<p><code>fd '[mn]ands'</code></p>
+</li>
+<li>
+<p>Search files with extension</p>
+<p><code>fd -e &lt;ext&gt;</code></p>
+</li>
+<li>
+<p>Search ignoring case and not ingoring anything and following links</p>
+<p><code>fd -iIL &lt;name&gt;</code></p>
+</li>
+<li>
+<p>Search from a specific path</p>
+<p><code>fd -e pem . '&lt;path&gt;'</code></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="find"><a class="header" href="#find">Find</a></h2>
+<ol>
+<li>find and zip: <code>find . -name "&lt;pattern&gt;" | zip ./targets.zip -m@</code></li>
+<li>find and execute on all results: <code>find . -name "&lt;pattern&gt;" -exec cmd {} +</code></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="git-1"><a class="header" href="#git-1">git</a></h1>
+<ul>
+<li>
+<p>Show file content (any branch): <code>git cat-file main:&lt;filename&gt;</code><br />
+Ref. <a href="https://git-scm.com/docs/git-cat-file">git cat-file</a></p>
+</li>
+<li>
+<p>Rename current branch: <code>git branch -m &lt;newname&gt;</code></p>
+</li>
+<li>
+<p>Show local branch name: <code>git rev-parse --abbrev-ref HEAD</code></p>
+</li>
+<li>
+<p>Update and merge main into current branch:</p>
+<ul>
+<li><code>git fetch origin main:main</code></li>
+<li><code>git merge origin/main</code></li>
+</ul>
+</li>
+<li>
+<p>Push all branches: <code>git push -u origin --all</code></p>
+</li>
+<li>
+<p>Swap remote: <code>git remote set-url origin &lt;new_origin_url&gt;</code></p>
+</li>
+<li>
+<p>Check which branches have been merged  : <code>git branch --merged</code></p>
+</li>
+<li>
+<p>Compare 2 branches: <code>git diff branch1..branch2</code></p>
+</li>
+<li>
+<p>Show commits in the current branch only<br />
+<code>git log &lt;branchoff_name&gt;^..HEAD</code><br />
+(where branchoff_name is the name of the branch the current one has been branched off from)</p>
+</li>
+<li>
+<p>Remove last (local-only) commit: <code>git reset --soft HEAD~</code></p>
+</li>
+<li>
+<p>Remove more than one (N) commit: <code>git reset --soft HEAD~N</code></p>
+</li>
+<li>
+<p>Change case of a file when working on macOS: <code>git mv UPPERCASE uppercase</code></p>
+</li>
+<li>
+<p>Fix broken commits and push: <a href="https://sethrobertson.github.io/GitFixUm/fixup.html">On undoing, fixing, or removing commits in git</a></p>
+</li>
+<li>
+<p>Cleaning up repos</p>
+<ul>
+<li>
+<p>Analyze (<a href="https://github.com/github/git-sizer">git-sizer</a> or <a href="https://github.com/newren/git-filter-repo">git-filter-repo</a>)<br />
+<code>brew install git-sizer</code><br />
+<code>git-sizer</code></p>
+<p>or</p>
+<p><code>pip install git-filter-repo</code>
+<code>git-filter-repo --analyze</code>
+<code>open .git/filter-repo/analysis</code></p>
+</li>
+<li>
+<p>Remove files from history Ref. <a href="https://github.com/newren/git-filter-repo">git-filter-repo</a><br />
+<code>git-filter-repo --invert-paths --path '&lt;filename&gt;'</code><br />
+or use a text file with the list of paths to be deleted<br />
+<code>git-filter-repo --invert-paths --paths-from-file &lt;tobedeleted_file_list&gt;</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Find a file in any branch</p>
+<ul>
+<li><code>git log --all -&lt;filepath&gt;</code></li>
+</ul>
+<p>or</p>
+<ul>
+<li><code>git log --all -'**/&lt;filename&gt;'</code></li>
+</ul>
+</li>
+<li>
+<p>Find branch where a file is</p>
+<ul>
+<li>
+<p><code>git log --all -somefile</code></p>
+<p>returns commit_nr</p>
+</li>
+</ul>
+<p><code>git branch -a --contains &lt;commit_nr&gt;</code></p>
+<p>returns otherbranch</p>
+</li>
+<li>
+<p>Show the commit tree in the cli: <code>git log --pretty=oneline --graph --decorate --all</code></p>
+</li>
+<li>
+<p>Remove untracked files</p>
+<ul>
+<li><code>git clean -n</code> (dry run)</li>
+<li><code>git clean -f</code></li>
+</ul>
+</li>
+<li>
+<p>Automate access token</p>
+<ul>
+<li>
+<p>For multiple repos</p>
+<pre><code>B64_PAT=$(printf ":%s" "$SYSTEM_ACCESSTOKEN" | base64)
+git config --global http.https://dev.azure.com/.extraheader "Authorization: Basic $B64_PAT"
+git config --global --unset http.https://dev.azure.com/.extraheader
+</code></pre>
+<p>But the above leaves the token in the git config file. So remember to remove it with:<br />
+<code>git config --global --unset http.https://dev.azure.com/.extraheader</code></p>
+</li>
+<li>
+<p>For only one repo<br />
+<code>git -c http.extraheader="Authorization: Basic $B64_PAT" clone ...</code></p>
+</li>
+</ul>
+<p>Note: Bearer often does not work.</p>
+</li>
+<li>
+<p>Squash commits on merge</p>
+<p><code>git merge --squash # automatic, might fail</code>
+<code>git rebase -i # interactive</code></p>
+</li>
+<li>
+<p><a href="https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag#:~:text=Checking%20Out%20Tags&amp;text=This%20puts%20the%20repo%20in,by%20the%20commits%20SHA%20hash.">git tag</a></p>
+</li>
+<li>
+<p>Work with multiple branch at the same time</p>
+<pre><code>git worktree add &lt;path&gt; &lt;branch_name&gt;
+git worktree list
+git worktree remove &lt;worktree-name&gt;
+</code></pre>
+</li>
+<li>
+<p>Rename local and remote branch</p>
+<pre><code>git checkout &lt;old_name&gt;
+git branch -m &lt;new_name&gt;
+git push origin -u &lt;new_name&gt;
+git push origin --delete &lt;old_name&gt;
+</code></pre>
+</li>
+<li>
+<p>Rewrite commit author and committer</p>
+<pre><code>git filter-branch --commit-filter '
+      if [ "$GIT_COMMITTER_EMAIL" = "WRONG_COMMITTER_EMAIL" ];
+      then
+              GIT_AUTHOR_NAME="RIGHT_COMMITTER";
+              GIT_AUTHOR_EMAIL="RIGHT_COMMITTER_EMAIL";
+              GIT_COMMITTER_NAME="RIGHT_COMMITTER";
+              GIT_COMMITTER_EMAIL="RIGHT_COMMITTER_EMAIL";
+              git commit-tree "$@";
+      else
+              git commit-tree "$@";
+      fi' HEAD
+git push -f --all
+</code></pre>
+</li>
+</ul>
+<h2 id="submodules"><a class="header" href="#submodules">Submodules</a></h2>
+<p><a href="https://devconnected.com/how-to-add-and-update-git-submodules/">External ref.</a></p>
+<ul>
+<li>Add
+<pre><code>git submodule add http://submodule submodule
+git add .
+git commit -m “added submodule”
+git push
+</code></pre>
+</li>
+<li>Clone
+<pre><code>git clone --recursive --jobs 6 https://module
+cd module
+</code></pre>
+</li>
+<li>Pull
+<pre><code>git pull --recurse-submodules
+</code></pre>
+</li>
+<li>Update submodule updated elsewehre
+<pre><code>cd submodule
+git checkout master
+git pull # pull the latest commit from the submodule repo
+cd ..
+git add .
+git commit -m “updated submodule”
+git push
+</code></pre>
+</li>
+<li>Updated submodule with local changes
+<pre><code>cd submodule
+touch changedfile.txt
+git add .
+git commit -m “changes to submodule”
+git push
+cd ..
+git add .
+git commit -m “updated submodule”
+git push
+</code></pre>
+</li>
+<li>Avoid pushing module before submodule.
+If we make the following mistake:
+<pre><code>cd submodule
+touch changedfile.txt
+git add .
+git commit -m “added changedfile.txt”
+# here we forget git push
+cd ..
+git add .
+git commit -m “updated submodule”
+git push
+</code></pre>
+We must correct it this way:
+<pre><code>git clone --recursive --jobs 6 https://module 
+# the above will return some errors trying to clone submodule
+cd module/submodule
+git checkout master
+git pull
+cd ..
+git add .
+git commit -m “fixed submodule”
+git push
+</code></pre>
+</li>
+<li>Remove a submodule
+<pre><code>git rm submodule
+git add .
+git commit -m “removed submodule”
+git push
+</code></pre>
+</li>
+</ul>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<ul>
+<li><a href="https://trinhngocthuyen.com/posts/tech/50-shades-of-git-remotes-and-authentication/">50 Shades of git</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="google"><a class="header" href="#google">Google</a></h1>
+<ul>
+<li>
+<p>getting a page in Gogle search:</p>
+<p><a href="https://www.google.com/webmasters/tools/home">Google Search Console</a></p>
+<p><a href="https://support.google.com/webmasters/answer/6332964?hl=en&amp;ref_topic=4564315">Instructions</a></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="gradle"><a class="header" href="#gradle">Gradle</a></h1>
+<ul>
+<li>
+<p><a href="https://plugins.gradle.org/plugin/org.gradle.test-retry">Test Retry Plugin</a></p>
+</li>
+<li>
+<p>Create a gradle task that runs a script (example)</p>
+</li>
+</ul>
+<pre><code class="language-gradle">task myTask(dependsOn: ['assembleDebug', 'assembleRelease']) {
+    group 'My group'
+    description 'My description'
+    doLast {
+        exec {
+            executable "sh"
+            args "-c", "runscript.sh"
+        }
+    }
+}
+
+</code></pre>
+<p>In Kotlin</p>
+<pre><code class="language-Kotlin">tasks.register("myTask") {
+    doLast {
+        val result = exec {
+            commandLine("echo", "hi")
+        }
+        println(result.exitValue)
+    }
+}
+</code></pre>
+<ul>
+<li>Remove old-ish cache</li>
+</ul>
+<pre><code>find ~/.gradle -type f -atime +30 -delete
+find ~/.gradle -type d -mindepth 1 -empty -delete
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="homebrew"><a class="header" href="#homebrew">Homebrew</a></h1>
+<ul>
+<li>
+<p><a href="https://blog.jpalardy.com/posts/untangling-your-homebrew-dependencies/">Dependencies</a></p>
+<ul>
+<li>
+<p>list all installed packages</p>
+<p><code>brew list</code></p>
+</li>
+<li>
+<p>list isntalled cask packages</p>
+<p><code>brew installed --cask</code></p>
+</li>
+<li>
+<p>General package info</p>
+<p><code>brew info X</code></p>
+</li>
+<li>
+<p>What are X dependencies</p>
+<p><code>brew deps X</code></p>
+</li>
+<li>
+<p>What depends on X</p>
+<p><code>brew uses X --installed</code></p>
+</li>
+<li>
+<p>Do not use brew leaves to find what can be uninstalled (see link above)</p>
+</li>
+<li>
+<p>Save current brew installed list (to Brewfile)</p>
+<p><code>brew bundle dump</code></p>
+<p>To restore</p>
+<p><code>brew bundle install</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://formulae.brew.sh/cask/temurin">Java</a></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hurl"><a class="header" href="#hurl">Hurl</a></h1>
+<p>Making REST calls sequences easy for the terminal chaps</p>
+<ol>
+<li><a href="https://hurl.dev/">Hurl</a></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ios"><a class="header" href="#ios">iOS</a></h1>
+<ul>
+<li>
+<p>Start simulator<br />
+<code>open -a Simulator.app</code></p>
+</li>
+<li>
+<p>Simulate location in Simulator<br />
+<code>xcrun simctl location {booted_device.udid} start --speed 10 {lat},{lng} {lat},{lng} {lat},{lng} ...</code><br />
+Note that <code>{booted_device.udid}</code> can be replaced by <code>booted</code></p>
+</li>
+<li>
+<p>List simulators
+<code>xcrun simclt list</code></p>
+</li>
+<li>
+<p>Select Xcode
+<code>sudo xcode-select -s /Applications/&lt;Xcode version&gt;</code></p>
+</li>
+<li>
+<p>Run stuff as if on x86
+<code>arch -x86_64 &lt;cmd&gt;</code></p>
+</li>
+<li>
+<p>Run stuff forcing arm (when within a x86 app)
+<code>arch -arm64 &lt;cmd&gt;</code></p>
+</li>
+<li>
+<p>Generic xcodebuild command
+<code>env NSUnbufferedIO=YES xcodebuild -workspace &lt;workspace filename&gt; -scheme &lt;scheme name&gt; -derivedDataPath ./DerivedData -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),arch=x86_64' -resultBundlePath './output/result.xcresult' OTHER_SWIFT_FLAGS=&lt;other flags&gt; build test</code><br />
+Note the arch parameter in the destination if you want to force running with Rosetta2</p>
+</li>
+</ul>
+<h1 id="managing-ios-simulators"><a class="header" href="#managing-ios-simulators">Managing iOS Simulators</a></h1>
+<p>(from <a href="https://gist.github.com/patriknyblad/be3678bf6b515f11b602051530b5ac3e">here</a>)</p>
+<h3 id="list-all-simulators-created"><a class="header" href="#list-all-simulators-created">List all simulators created</a></h3>
+<pre><code>$ xcrun simctl list --json
+</code></pre>
+<h3 id="delete-old-and-unavailable-simulators"><a class="header" href="#delete-old-and-unavailable-simulators">Delete old and unavailable simulators</a></h3>
+<pre><code>$ xcrun simctl delete unavailable
+</code></pre>
+<h3 id="open-simulatorapp"><a class="header" href="#open-simulatorapp">Open Simulator.app</a></h3>
+<pre><code>$ open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/
+</code></pre>
+<h3 id="boot-specific-simulators"><a class="header" href="#boot-specific-simulators">Boot specific simulators</a></h3>
+<p>You can find the id/name by listing all simulators <code>$ xcrun simctl list</code>.</p>
+<pre><code>$ xcrun simctl boot AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEE // UUID Hex string
+$ xcrun simctl boot "iPhone XS Max" // Name of simulator
+</code></pre>
+<h3 id="create-a-simulator-with-a-specific-name"><a class="header" href="#create-a-simulator-with-a-specific-name">Create a simulator with a specific name</a></h3>
+<p>You can name simulators and use them for specific purposes.</p>
+<pre><code>$ xcrun simctl create iPhone7-my-app com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-10–3
+</code></pre>
+<h3 id="shutdown-simulator"><a class="header" href="#shutdown-simulator">Shutdown Simulator</a></h3>
+<pre><code>$ xcrun simctl shutdown booted
+$ xcrun simctl shutdown AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEE
+$ xcrun simctl shutdown "iPhone7-my-app"
+$ xcrun simctl shutdown "iPhone XS"
+$ xcrun simctl shutdown all
+</code></pre>
+<h3 id="erase-contents-in-simulator"><a class="header" href="#erase-contents-in-simulator">Erase contents in Simulator</a></h3>
+<p>Similar to running a factory restore on your device</p>
+<pre><code>$ xcrun simctl erase AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEE
+$ xcrun simctl erase "iPhone7-my-app"
+$ xcrun simctl erase "iPhone XS"
+$ xcrun simctl erase all
+</code></pre>
+<h3 id="add-media-to-simulator"><a class="header" href="#add-media-to-simulator">Add media to simulator</a></h3>
+<pre><code>$ xcrun simctl addmedia booted ./video_01.mp4
+$ xcrun simctl addmedia "iPhone XS" ./video_01.mp4
+</code></pre>
+<h1 id="working-with-apps"><a class="header" href="#working-with-apps">Working with apps</a></h1>
+<h3 id="install-app"><a class="header" href="#install-app">Install App</a></h3>
+<pre><code>$ xcrun simctl install booted "./path/to/ios-app.app"
+$ xcrun simctl install "iPhone XS Max" "./path/to/ios-app.app"
+</code></pre>
+<h3 id="uninstall-app"><a class="header" href="#uninstall-app">Uninstall App</a></h3>
+<pre><code>$ xcrun simctl uninstall booted com.mycompany.myapp
+$ xcrun simctl uninstall "iPhone XS Max" com.mycompany.myapp
+</code></pre>
+<h3 id="launch-app"><a class="header" href="#launch-app">Launch app</a></h3>
+<pre><code>$ xcrun simctl launch booted com.mycompany.myapp
+$ xcrun simctl launch "iPhone XS Max" com.mycompany.myapp
+</code></pre>
+<h3 id="terminate-app"><a class="header" href="#terminate-app">Terminate app</a></h3>
+<pre><code>$ xcrun simctl terminate booted com.mycompany.myapp
+$ xcrun simctl terminate "iPhone XS Max" com.mycompany.myapp
+</code></pre>
+<h3 id="open-url"><a class="header" href="#open-url">Open URL</a></h3>
+<p>Can also be used to open an app, if you open the app using a url the first time it will give you an alert asking if you want to navigate to that app.</p>
+<pre><code>$ xcrun simctl openurl booted https://google.com
+$ xcrun simctl openurl "iPhone XS Max" https://google.com
+
+$ xcrun simctl openurl booted myapp://
+$ xcrun simctl openurl "iPhone XS Max" myapp://
+</code></pre>
+<h3 id="record-simulator-video"><a class="header" href="#record-simulator-video">Record simulator video</a></h3>
+<pre><code>$ xcrun simctl io booted recordVideo — type=mp4 ./simulator-record_001.mp4
+$ xcrun simctl io "iPhone XS Max" recordVideo — type=mp4 ./simulator-record_001.mp4
+</code></pre>
+<h3 id="screenshot-simulator"><a class="header" href="#screenshot-simulator">Screenshot simulator</a></h3>
+<pre><code>$ xcrun simctl io booted screenshot ./simulator-screenshot_001.png
+$ xcrun simctl io "iPhone XS Max" screenshot ./simulator-screenshot_001.png
+</code></pre>
+<h3 id="more-help-provided-using-help-command"><a class="header" href="#more-help-provided-using-help-command">More help provided using help command</a></h3>
+<pre><code>$ xcrun simctl help
+</code></pre>
+<h1 id="example-scripts"><a class="header" href="#example-scripts">Example scripts</a></h1>
+<h3 id="run-an-app-on-many-simulators"><a class="header" href="#run-an-app-on-many-simulators">Run an app on many simulators</a></h3>
+<p>I created and use this script for running the app I am developing in all possible screen sizes at once to verify that everything looks and works as intended.</p>
+<pre><code>#!/bin/bash
+
+# List of simulators: `$ xcrun simctl list`
+SIMULATORS=("iPhone SE" "iPhone 8" "iPhone 8 Plus" "iPhone XS" "iPhone XS Max" "iPhone XR")
+
+# Comment or remove variables to skip a step
+APP_PATH="/path/to/my/build/directory/when/running/a/build/in/xcode/app.app"
+APP_IDENTIFIER="com.mycompany.myapp" # Identifier from info.plist
+OPEN_URL="myapp://some/page/in/app" # Deep linking
+
+echo "Running on ${#SIMULATORS[*]} simulators."
+for index in ${!SIMULATORS[*]}
+do
+    SIMULATOR=${SIMULATORS[$index]}
+    echo "Booting ${SIMULATOR}..."
+    xcrun simctl boot "${SIMULATOR}"
+
+    if [ ! -z "$APP_PATH" ]
+    then
+        echo "${SIMULATOR} installing: ${APP_PATH##*/}"
+        xcrun simctl install "${SIMULATOR}" "${APP_PATH}"
+    fi
+
+    if [ ! -z "$APP_IDENTIFIER" ]
+    then
+        echo "${SIMULATOR} opening app: ${APP_IDENTIFIER}"
+        xcrun simctl launch "${SIMULATOR}" "${APP_IDENTIFIER}"
+    fi
+
+    if [ ! -z "$OPEN_URL" ]
+    then
+        echo "${SIMULATOR} opening url: ${OPEN_URL}"
+        xcrun simctl openurl "${SIMULATOR}" "${OPEN_URL}"
+    fi
+
+done
+</code></pre>
+<h6 id="references-1"><a class="header" href="#references-1">References:</a></h6>
+<ul>
+<li>https://medium.com/@ankitkumargupta/ios-simulator-command-line-tricks-ee58054d30f4</li>
+<li>https://medium.com/xcblog/simctl-control-ios-simulators-from-command-line-78b9006a20dc</li>
+<li>https://nshipster.com/simctl/</li>
+<li>https://www.linuxjournal.com/content/bash-arrays</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="java-1"><a class="header" href="#java-1">Java</a></h1>
+<h1 id="android-keystore"><a class="header" href="#android-keystore">Android keystore</a></h1>
+<p>The <strong>keystore</strong> format has changed around Java 8.0.3xx
+(check value of JAVA_HOME)</p>
+<p>Using an older version of Java one gets an error</p>
+<pre><code>[old_java]/bin/keytool -list -v -keystore "$HOME/.android/debug.keystore" 
+    -alias androiddebugkey -storepass android -keypass android
+</code></pre>
+<p>Using an newer version of Java everything works</p>
+<pre><code>[new_java]/bin/keytool -list -v -keystore "$HOME/.android/debug.keystore" 
+    -alias androiddebugkey -storepass android -keypass android
+</code></pre>
+<ul>
+<li>
+<p>Support multiple java environments (same line as PyEnv and RbEnv): <a href="https://www.jenv.be/">jenv</a></p>
+</li>
+<li>
+<p>java_home: remember the command <code>/usr/libexec/java_home</code></p>
+</li>
+<li>
+<p>Add a certificate: <code>$JAVA_HOME/bin/keytool -importcert -file "&lt;filepath.cer&gt;" -cacerts -alias "&lt;alias&gt;" -storepass changeit</code></p>
+</li>
+<li>
+<p>Delete a certificate: <code>keytool -delete -alias &lt;alias&gt; -keystore -storepass changeit</code></p>
+</li>
+<li>
+<p>List certificates: <code>keytool -list -v -cacerts -storepass changeit</code></p>
+</li>
+<li>
+<p><a href="https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html">Java Keystore commands</a></p>
+</li>
+<li>
+<p>Show java properties: <code>java -XshowSettings:properties -version</code></p>
+</li>
+<li>
+<p>Show java settings <code>java -XshowSettings:all -version</code></p>
+</li>
+<li>
+<p>Automate the creation of native macOS java apps with installers: <a href="https://centerkey.com/mac/java/">MacJava</a> which is a guide for <a href="https://docs.oracle.com/en/java/javase/17/jpackage/index.html">jpackage</a></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="javascript"><a class="header" href="#javascript">JavaScript</a></h1>
+<p><code>nvm ls</code>
+<code>nvm ls-remote</code>
+<code>nvm install 18.18.2</code>
+<code>nvm use 18.18.2</code>
+<code>npm config set cafile "$HOME/certs/TIAROOTCA2022.pem"</code></p>
+<p><code>npm init -y</code></p>
+<p><code>npm install eslint --save-dev</code>
+<code>npx eslint --init</code></p>
+<p><code>npm install lite-server --save-dev</code>
+<code>npm run dev</code></p>
+<p><code>adb reverse tcp:3000 tcp:3000</code></p>
+<h2 id="run-processes"><a class="header" href="#run-processes">Run processes</a></h2>
+<p>Use <a href="https://github.com/sindresorhus/execa">Execa</a></p>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<ul>
+<li><code>brew install nvm</code></li>
+<li><code>nvm ls</code></li>
+<li><code>nvm install node</code> or <code>nvm install vx.y.z</code></li>
+<li><code>nvm use x.y.z</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="jq"><a class="header" href="#jq">jq</a></h1>
+<ul>
+<li>Visual Studio Code extension: <a href="https://github.com/petli-full/jq-vscode">jq-vscode</a></li>
+<li><a href="https://stedolan.github.io/jq/tutorial/">Tutorial</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="kotlin"><a class="header" href="#kotlin">Kotlin</a></h1>
+<ul>
+<li>Build cli apps in Kotlin: <a href="https://github.com/ajalt/clikt">clikt</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="launchctl"><a class="header" href="#launchctl">Launchctl</a></h1>
+<h2 id="set-environment-variables-in-macos-for-gui-apps"><a class="header" href="#set-environment-variables-in-macos-for-gui-apps">Set environment variables in macOS for GUI apps</a></h2>
+<p>In general environment variables for GUI apps in macOS are stored in <code>/etc/launchd.conf</code>.</p>
+<p>Otherwise one can:</p>
+<pre><code>launchctl setenv &lt;KEY&gt; "&lt;VALUE&gt;"
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="maven"><a class="header" href="#maven">Maven</a></h1>
+<ol>
+<li>How to manually download a dependency (e.g. robolectric)</li>
+</ol>
+<pre><code>mvn -DgroupId=org.robolectric -DartifactId=android-all-instrumented -Dversion=11-robolectric-6757853-i4 dependency:get
+</code></pre>
+<p>1.1 Better yet</p>
+<pre><code>mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=groupId:artifactId:version:packaging -Dtransitive=false
+</code></pre>
+<p>Using a .m2/settings.xml like</p>
+<pre><code>&lt;settings&gt;
+
+&lt;servers&gt;
+    &lt;server&gt;
+        &lt;id&gt;central&lt;/id&gt;
+    &lt;/server&gt;
+    &lt;server&gt;
+        &lt;id&gt;google&lt;/id&gt;
+    &lt;/server&gt;
+    &lt;server&gt;
+        &lt;id&gt;jcenter&lt;/id&gt;
+    &lt;/server&gt;
+    &lt;server&gt;
+        &lt;id&gt;github&lt;/id&gt;
+        &lt;username&gt;[username]&lt;/username&gt;
+        &lt;password&gt;[github token]&lt;/password&gt;
+    &lt;/server&gt;
+&lt;/servers&gt;
+
+ &lt;profiles&gt;
+
+   &lt;profile&gt;
+     &lt;id&gt;myprofile&lt;/id&gt;
+     &lt;repositories&gt;
+       &lt;repository&gt;
+        &lt;id&gt;central&lt;/id&gt;
+        &lt;url&gt;https://repo1.maven.org/maven2/&lt;/url&gt;
+       &lt;/repository&gt;
+       &lt;repository&gt;
+        &lt;id&gt;jcenter&lt;/id&gt;
+        &lt;url&gt;https://jcenter.bintray.com/&lt;/url&gt;
+       &lt;/repository&gt;
+
+       &lt;repository&gt;
+        &lt;id&gt;google&lt;/id&gt;
+        &lt;url&gt;https://maven.google.com/&lt;/url&gt;
+       &lt;/repository&gt;
+
+       &lt;repository&gt;
+         &lt;id&gt;github&lt;/id&gt;
+         &lt;name&gt;Github&lt;/name&gt;
+         &lt;url&gt;https://maven.pkg.github.com/...&lt;/url&gt;
+       &lt;/repository&gt;
+     &lt;/repositories&gt;
+   &lt;/profile&gt;
+
+ &lt;/profiles&gt;
+
+ &lt;activeProfiles&gt;
+   &lt;activeProfile&gt;myprofile&lt;/activeProfile&gt;
+ &lt;/activeProfiles&gt;
+
+ &lt;/settings&gt;
+</code></pre>
+<ol start="2">
+<li>How to upload a jar dependency to a local folder for testing</li>
+</ol>
+<pre><code>mvn deploy:deploy-file -Dfile=./test.jar -Durl=file:///Users/marionegroponzi/Developer/Workspace/tbd/deploy -DgroupId=com.org -DartifactId=test -Dversion=1.0 -DgeneratePom=true
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook"><a class="header" href="#mdbook">mdbook</a></h1>
+<p>The tool used to build this site.</p>
+<p><a href="https://rust-lang.github.io/mdBook/">mdbook</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mojo"><a class="header" href="#mojo">Mojo</a></h1>
+<h2 id="ref"><a class="header" href="#ref">Ref</a></h2>
+<p>https://docs.modular.com/mojo/manual/</p>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h2>
+<p><code>python3 -m venv mojo-venv &amp;&amp; source mojo-venv/bin/activate</code>
+<code>modular install mojo</code></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="multitime"><a class="header" href="#multitime">Multitime</a></h1>
+<ul>
+<li>
+<p>Run the same command multiple time and measure</p>
+<pre><code>multitime -q -n 10 &lt;cmd&gt;
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nslookup"><a class="header" href="#nslookup">nslookup</a></h1>
+<ul>
+<li><a href="http://blog.smalleycreative.com/linux/nslookup-is-dead-long-live-dig-and-host/">Replacements</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="obs"><a class="header" href="#obs">OBS</a></h1>
+<p>How to setup a video background in a call</p>
+<p><em>Work in progress, still not working with Teams, and often it crashes</em></p>
+<ol>
+<li>Install <a href="https://obsproject.com/">OBS</a></li>
+<li>Install <a href="https://github.com/royshil/obs-backgroundremoval">OBS plugin to remove background</a></li>
+<li>Download a video <a href="https://www.pexels.com/search/videos/desktop%20wallpaper/">desktop background</a></li>
+<li>Add <em>media source</em> with video in the background</li>
+<li>Add <em>video capture</em> and apply to it Filters &gt; Video Filter "Background Removal"</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="performance"><a class="header" href="#performance">Performance</a></h1>
+<ul>
+<li>
+<p>Time</p>
+</li>
+<li>
+<p>gtime (gtime -v also gives info about memory usage, etc.)</p>
+</li>
+<li>
+<p><a href="https://github.com/sharkdp/hyperfine">Hyperfine</a></p>
+</li>
+<li>
+<p><a href="https://gist.github.com/denji/8333630">Other tools</a></p>
+</li>
+<li>
+<p><a href="https://github.com/wg/wrk">wrk</a>: Load generator</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="python"><a class="header" href="#python">Python</a></h1>
+<ol>
+<li>
+<p><a href="https://zetcode.com/python/requests/">Request</a></p>
+</li>
+<li>
+<h3 id="virtualenv"><a class="header" href="#virtualenv">Virtualenv</a></h3>
+<pre><code>python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py
+deactivate
+</code></pre>
+</li>
+<li>
+<h3 id="requirements"><a class="header" href="#requirements">Requirements</a></h3>
+<pre><code>pip freeze -r &gt; requirements.txt
+</code></pre>
+<p>or</p>
+<pre><code>pip install pipreqs
+pipreqs path/to/project
+</code></pre>
+</li>
+<li>
+<h3 id="install-with-custom-certificate"><a class="header" href="#install-with-custom-certificate">Install with custom certificate</a></h3>
+<pre><code>pip --cert $HOME/certs/MYCERT.pem install ...
+</code></pre>
+<p>or find the certificate repos (e.g. in the current virtual environment)</p>
+<pre><code>fd -e pem . venv
+cat $HOME/certs/MYCERT.pem &gt;&gt; venv/lib/python3.9/site-packages/pip/_vendor/certifi/cacert.pem
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ripgrep"><a class="header" href="#ripgrep">ripgrep</a></h1>
+<ul>
+<li><a href="https://mariusschulz.com/blog/fast-searching-with-ripgrep">Fast search</a></li>
+<li>Find log4j:
+<pre><code>sudo rg JndiLookup --binary -z / 2&gt;/dev/null
+</code></pre>
+</li>
+<li>Find a string in files with extension:
+<pre><code>rg '&lt;string&gt;' -g '*.&lt;ext&gt;'
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="robolectric"><a class="header" href="#robolectric">Robolectric</a></h1>
+<ol>
+<li><a href="https://robolectric.org/">Robolectric</a> downloads dynamically dependencies. It does not respect the repositories settings. To amke sure it uses a source that is not MavenCentral one must add the following in the root build.gradle.kts file.</li>
+</ol>
+<pre><code>allprojects {
+    tasks.withType&lt;Test&gt; {
+        systemProperty("robolectric.dependency.repo.id", "nexus")
+        systemProperty("robolectric.dependency.repo.url", "https://&lt;nexus_internal_url&gt;:8443/repository/android-group/")
+        systemProperty("javax.net.ssl.trustStoreType", "JKS")  // required for Robolectric 4.3.1 and JDK11
+        systemProperty("robolectric.logging", "stdout")
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ruby"><a class="header" href="#ruby">Ruby</a></h1>
+<ul>
+<li><a href="https://jonathanpike.net/2017/06/rendering-erb-without-rails">Templating without Rails</a></li>
+<li><a href="https://www.twilio.com/blog/5-ways-make-http-requests-ruby">Make http requests</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust-1"><a class="header" href="#rust-1">Rust</a></h1>
+<ul>
+<li><a href="https://doc.rust-lang.org/rust-by-example/index.html">Rust by Example</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="minimal-web-servers"><a class="header" href="#minimal-web-servers">Minimal Web Servers</a></h1>
+<p>Various solution for similar problems</p>
+<ul>
+<li>
+<p><a href="https://github.com/cesanta/mongoose">Mongoose (C library)</a></p>
+</li>
+<li>
+<p><code>python -m http.server 8080</code></p>
+</li>
+<li>
+<p><code>while true; do nc -l 127.0.0.1 8889 &lt; foo.html; done</code></p>
+</li>
+<li>
+<p><code>nc -l 127.0.0.1 8889 &lt; foo.html</code></p>
+</li>
+<li>
+<p><code>while true ; do nc -l -p 1500 -c 'echo -e "HTTP/1.1 200 OK\n\n $(date)"'; done</code></p>
+</li>
+<li>
+<p><code>while true ; do nc -l -p 1500 -e /path/to/yourprogram ; done</code></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="restart"><a class="header" href="#restart">restart</a></h1>
+<ul>
+<li>
+<p>restart from terminal</p>
+<pre><code>sudo shutdown -r now
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ssh"><a class="header" href="#ssh">ssh</a></h1>
+<ol>
+<li>
+<p>Create ssh keypair</p>
+<p><code>ssh-keygen -t rsa</code></p>
+</li>
+<li>
+<p>Example config file</p>
+<p>Putting the file below (named <code>config</code>) within the .ssh folder one can connect using <code>ssh server1</code></p>
+<pre><code>host *
+    AddKeysToAgent yes
+    ServerAliveInterval 100
+    ServerAliveCountMax 2
+    ForwardAgent yes
+    IdentityFile $HOME/.ssh/myuser/id_rsa
+    user myuser
+    StrictHostKeyChecking no
+    ConnectTimeout 3
+
+host server1
+    # here it uses the user myuser
+    hostname xxx.xxx.xxx.xxx
+host server2
+    IdentityFile $HOME/.ssh/anotheruser/id_rsa
+    user anotheruser
+    hostname yyy.yyy.yyy.yyy
+    
+</code></pre>
+</li>
+</ol>
+<h2 id="scp"><a class="header" href="#scp">scp</a></h2>
+<ol>
+<li>
+<p>copy files among remote machines (directly)</p>
+<pre><code>scp [OPTION] [user@]SRC_HOST:]file1 [user@]DEST_HOST:]file2
+</code></pre>
+</li>
+<li>
+<p>same as above but passing through the local machine</p>
+<pre><code>scp [OPTION] -3 [user@]SRC_HOST:]file1 [user@]DEST_HOST:]file2
+</code></pre>
+</li>
+<li>
+<p><a href="https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/">source of the 2 items above</a></p>
+</li>
+<li>
+<p><a href="https://haydenjames.io/linux-securely-copy-files-using-scp/">more</a></p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="swift"><a class="header" href="#swift">Swift</a></h1>
+<ol>
+<li>
+<p><a href="https://www.swift.org/getting-started/#using-the-package-manager">Getting started</a></p>
+</li>
+<li>
+<p><a href="https://github.com/yonaskolb/Mint">Mint</a>: A package manager that installs and runs Swift command line tool packages (<strong>why should I use it?</strong>)</p>
+</li>
+<li>
+<p><a href="https://github.com/jakeheis/SwiftCLI">SwiftCLI</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jakeheis/Ice">Ice</a>: A developer friendly package manager for Swift; 100% compatible with Swift Package Manager (<strong>why should I use it?</strong>)</p>
+</li>
+<li>
+<p><a href="https://www.swift.org/package-manager/">Swift Package Manager</a></p>
+<p>5.1 Create new executable app</p>
+<pre><code> swift package init --type executable
+</code></pre>
+<p>5.2 Build</p>
+<pre><code> swift build
+</code></pre>
+<p>5.3 Run</p>
+<pre><code> swift run
+</code></pre>
+<p>5.4 Test</p>
+<pre><code> swift test
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="thermal-throttling"><a class="header" href="#thermal-throttling">thermal throttling</a></h1>
+<ul>
+<li>
+<p>Check if the cpu thermal throttle (does not work on M1)</p>
+<p><code>pmset -g thermlog</code></p>
+</li>
+<li>
+<p>On Apple Silicon</p>
+<p><code>sudo powermetrics -s thermal</code></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="todo"><a class="header" href="#todo">TODO</a></h1>
+<p>nginx</p>
+<p>better ansible with files</p>
+<p>git annex and git lfs</p>
+<p>remove git history</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="various-from-everywhere"><a class="header" href="#various-from-everywhere">Various from everywhere</a></h1>
+<h2 id="convert-svg-to-png-via-cli"><a class="header" href="#convert-svg-to-png-via-cli">Convert svg to png via cli</a></h2>
+<pre><code>brew install librsvg
+rsvg-convert test.svg -o test.png
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="visual-studio-code"><a class="header" href="#visual-studio-code">Visual Studio Code</a></h1>
+<p>macOS &lt;=&gt; Windows
+Command &lt;=&gt; Ctrl
+option &lt;=&gt; Alt</p>
+<h2 id="macos-commands"><a class="header" href="#macos-commands">macOS Commands</a></h2>
+<ul>
+<li>
+<p>Select all occurrences of selected word: Command + F2</p>
+</li>
+<li>
+<p>Select all occurrences of selected word one-by-one: Command + D</p>
+</li>
+<li>
+<p>Auto Indent Code: Shift + Option + F</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="vnc"><a class="header" href="#vnc">VNC</a></h1>
+<ol>
+<li>VNC over ssh (from <a href="https://www.techrepublic.com/article/how-to-connect-to-vnc-using-ssh/">here</a>)
+<pre><code>ssh -L 5900:localhost:5900 REMOTE_IP
+</code></pre>
+Open VNC to <code>localhost:5900</code></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="xcinfo"><a class="header" href="#xcinfo">xcinfo</a></h1>
+<p>Intall multiple version of Xcode from the cli</p>
+<ul>
+<li>
+<p>Available versions</p>
+<p><code>xcinfo list</code></p>
+</li>
+<li>
+<p>Install a specific version</p>
+<p><code>xcinfo install 13.2.1</code></p>
+</li>
+</ul>
+<h1 id="xcodes"><a class="header" href="#xcodes">xcodes</a></h1>
+<ul>
+<li><a href="https://github.com/XcodesOrg/xcodes">Xcodes</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="xcode"><a class="header" href="#xcode">Xcode</a></h1>
+<ul>
+<li>
+<p>Xcode command line uploader (e.g. for Log4j) - possibly outdated</p>
+<p><code>xcrun iTMSTransporter</code></p>
+</li>
+<li>
+<p><a href="https://github.com/XcodesOrg/xcodes">xcodes</a> to download multiple xcode versions</p>
+</li>
+<li>
+<p>Install Xcode and runtimes</p>
+</li>
+</ul>
+<pre><code>unxip --version || brew install unxip
+unxip Xcode_15.1.xip
+sudo mv -f ./Xcode.app /Applications/Xcode_15.1.app
+sudo xcode-select -s /Applications/Xcode_15.1.app
+sudo xcodebuild -license accept
+sudo /Applications/${{ xcode.Value.targetFileName }}/Contents/Developer/usr/bin/xcodebuild -runFirstLaunch
+xcodebuild -downloadPlatform iOS
+
+</code></pre>
+<ul>
+<li>Kill all Simulator instances: <code>killall Simulator</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zip"><a class="header" href="#zip">Zip</a></h1>
+<ul>
+<li>
+<p>zip folder: <code>zip &lt;name&gt;.zip &lt;folder&gt;/**/*</code></p>
+</li>
+<li>
+<p>unzip: <code>unzip &lt;name&gt;.zip</code></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zola"><a class="header" href="#zola">Zola</a></h1>
+<p>A static website generator in Rust. More flexible than mdbook.</p>
+<p><a href="https://dev.to/davidedelpapa/zola-tutorial-how-to-use-zola-the-rust-based-static-site-generator-for-your-next-small-project-and-deploy-it-on-netlify-375n">Tutorial to get started</a></p>
+<ul>
+<li><a href="www.getzola.org">Zola</a></li>
+<li><a href="https://tera.netlify.app/">Tera Template Engine</a></li>
+<li><a href="https://www.getzola.org/documentation/themes/installing-and-using-themes/">Installing Themes</a></li>
+<li><a href="https://github.com/getzola/book">book theme</a></li>
+<li><a href="https://github.com/shalzz/zola-deploy-action/blob/master/entrypoint.sh">Zola DEploy Action for GitHub</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zsh"><a class="header" href="#zsh">zsh</a></h1>
+<ul>
+<li>
+<p><a href="https://superuser.com/questions/91881/invoke-zsh-having-it-run-a-command-and-then-enter-interactive-mode-instead-of">Directly run a command</a></p>
+</li>
+<li>
+<p><code>cp -a</code> preserves flags and dates (and implies -r)</p>
+</li>
+<li>
+<p>clear history <code>exec rm "$HISTFILE"</code></p>
+</li>
+<li>
+<p>execute a command every time one cd-ing into a foler:</p>
+</li>
+</ul>
+<pre><code>function cd {
+    # actually change the directory with all args passed to the function
+    builtin cd "$@"
+    # if there's a regular file named "todo.txt"...
+    if [ -f "todo.txt" ] ; then
+        # display its contents
+        cat todo.txt
+    fi
+}
+</code></pre>
+<ul>
+<li>
+<p>time how long it takes to load zsh: <code>/usr/bin/time zsh -i -c exit</code></p>
+</li>
+<li>
+<p>optimize nvm loading time:</p>
+<pre><code class="language-bash">export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] &amp;&amp; \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm (commented out)
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] &amp;&amp; \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"; nvm $@" # added
+</code></pre>
+</li>
+<li>
+<p>~/.zshrc</p>
+</li>
+</ul>
+<pre><code>export HISTFILE=~/.zsh_history
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+
+# Lang
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+# Example aliases
+alias zshconf="code ~/.zshrc"
+
+# comment for performance
+# test -e "${HOME}/.iterm2_shell_integration.zsh" &amp;&amp; source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Editor
+export EDITOR=nano
+export VISUAL=nano
+
+# Homebrew
+export PATH=/opt/homebrew/bin:/usr/local/sbin:/usr/local/bin:$PATH
+
+# OpenSSL - prioritise to Homebrew openssl so PyEnv and RbEnv use it for Python installations
+export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+
+# for compilers
+# export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+# export CFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
+
+# Java
+export JAVA_STUDIO_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+export JAVA_IDEA_HOME="/Applications/IntelliJ IDEA CE.app/Contents/jbr/Contents/Home"
+export JAVA_GRAALVM_HOME="/Library/Java/JavaVirtualMachines/graalvm-community-openjdk-17.0.9+9.1/Contents/Home"
+
+alias jstudio='export JAVA_HOME="$JAVA_STUDIO_HOME" &amp;&amp; export PATH="$JAVA_HOME/bin:$PATH"'
+alias jidea='export JAVA_HOME="$JAVA_IDEA_HOME" &amp;&amp; export PATH="$JAVA_HOME/bin:$PATH"'
+alias j11='export JAVA_HOME="`/usr/libexec/java_home -v 11`";export PATH="$JAVA_HOME/bin:$PATH"'
+alias jgraal='export JAVA_HOME="$JAVA_GRAALVM_HOME" &amp;&amp; export PATH="$JAVA_HOME/bin:$PATH"'
+
+# Default to IntelliJ JBR
+jidea
+
+
+# Android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK=$ANDROID_HOME
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+
+# RbEnv
+export PATH="$HOME/.rbenv/bin:$PATH:"
+eval "$(rbenv init -)"
+
+# PyEnv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv &gt;/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# jenv
+# export PATH="$HOME/.jenv/bin:$PATH"
+# eval "$(jenv init -)"
+
+# Flutter
+export PATH="$HOME/Developer/flutter/bin:$PATH"
+
+# Dart
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# alias px-off="unset http_proxy https_proxy ALL_PROXY JAVA_OPTS JAVA_TOOL_OPTIONS"
+# alias px-on="source ~/.zshrc"
+
+# mongodb
+export PATH="/usr/local/opt/mongodb-community@4.4/bin:$PATH"
+
+# cli apps
+export PATH="$HOME/cliapps:$PATH"
+
+
+# aliases
+alias g='git'
+
+alias hh='history -E -1000'
+alias ls='exa -lag --header'
+alias up='brew update &amp;&amp; brew upgrade &amp;&amp; flutter upgrade'
+alias gt='gtime -f "time result\ncmd:%C\nreal %es\nuser %Us \nsys  %Ss \nmemory:%MKB \ncpu %P"'
+alias fd='fd -HI'
+
+alias push='git push'
+alias pull='git pull'
+alias merge='git merge'
+alias commit='git commit'
+alias switch='git switch'
+alias branch='git branch'
+alias checkout='git checkout'
+alias status='git status'
+alias clone='git clone'
+alias glog='git log --graph --decorate --oneline'
+alias worktree='git worktree'
+alias gtree='git worktree'
+alias gdiff='git diff'
+alias greset='git reset'
+
+alias certs='$HOME/certs/certs.sh'
+
+export PATH="/Applications/sonar-scanner-5.0.1.3006-macosx/bin/:$PATH"
+
+# Node
+export NVM_DIR="$HOME/.nvm"
+  # [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] &amp;&amp; \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] &amp;&amp; \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+  alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"; nvm $@"
+
+# export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+
+eval "$(starship init zsh)"
+
+function cd {
+    # actually change the directory with all args passed to the function
+    builtin cd "$@"
+    # if there's a regular file named "readme.md"...
+    if [ -f "readme.md" ] ; then
+        # display its content
+        cat readme.md
+    fi
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributors"><a class="header" href="#contributors">Contributors</a></h1>
+<p>Mario Negro Ponzi</p>
+<p>Site hosted in <a href="https://marionegroponzi.github.io/devbook/">GitHub Pages</a>.</p>
+<p>Site built with <a href="https://rust-lang.github.io/mdBook/index.html">mdbook</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

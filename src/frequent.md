@@ -101,8 +101,8 @@ ruff 0.5.0
 ```
     python3 -m venv venv
     source venv/bin/activate
-    pip install -r requirements.txt
-    python main.py
+    pip3 install -r requirements.txt
+    python3 main.py
     deactivate
 ```
 

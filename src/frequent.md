@@ -61,9 +61,11 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 
     `sudo shutdown -r now`
 
-## Python dance
+- System info
 
-- Better Python packaging: [UV](https://github.com/astral-sh/uv)
+    `system_profiler SPSoftwareDataType SPHardwareDataType`
+
+## Python [UV](https://github.com/astral-sh/uv)
 
 ```
 ### Install.
@@ -96,8 +98,7 @@ $ ruff --version
 ruff 0.5.0
 ```
 
-
-- .... otherwise
+## Old Python dance
 ```
     python3 -m venv venv
     source venv/bin/activate

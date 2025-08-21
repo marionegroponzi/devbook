@@ -51,6 +51,9 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 - Remove trailing spaces:
     - Settings > Editor > General > Strip trailing spaces on Save
 
+- Disable Sticky Scroll
+    - Right-click the sticky lines in the editor and click Disable
+
 ## macOS
 
 - Update from the Terminal

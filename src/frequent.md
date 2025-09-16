@@ -10,7 +10,7 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 
 ## VSCode
 
-- Select all occurrences of selected word: Cmd + F2
+- Select all occurrences of selected text: Cmd + F2
 
 - Auto Indent Code: Shift + Option + F
 
@@ -32,6 +32,8 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 
 
 ## IntelliJ
+
+- Select all occurences of seldcted text: ⌘⌃G (macOS) / Ctrl+Alt+Shift+J (Windows/Linux)
 
 - Reformat Code: Cmd + Option + L
 

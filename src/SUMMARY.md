@@ -34,6 +34,7 @@
 - [jq](jq.md)
 - [Kotlin](kotlin.md)
 - [Launchctl](launchctl.md)
+- [Linux Mint](linuxmint.md)
 - [Maven](maven.md)
 - [mdbook](mdbook.md)
 - [mojo](mojo.md)

@@ -58,9 +58,13 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 
 ## macOS
 
-- Update from the Terminal
+- Clear history
 
-    `echo '<password>' | sudo softwareupdate -iaR --user <username> --stdinpass && history -p && rm ~/.zsh_history`
+    ```
+    fc -p
+    rm ~/.zsh_history ~/.zsh_history.lock
+    exec zsh
+    ```
 
 - Restart from the Terminal
 

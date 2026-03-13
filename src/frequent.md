@@ -61,8 +61,10 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 - Clear history
 
     ```
+    # Private history mode
     fc -p
     rm ~/.zsh_history ~/.zsh_history.lock
+    # Restore history (which is now empty)
     exec zsh
     ```
 
@@ -73,6 +75,10 @@ git pull && git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $
 - System info
 
     `system_profiler SPSoftwareDataType SPHardwareDataType`
+
+- Keep macOS awake
+
+    `caffeinate`
 
 ## Python [UV](https://github.com/astral-sh/uv)
 
